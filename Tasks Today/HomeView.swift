@@ -41,7 +41,7 @@ class HomeView: UIView {
         
         collectionViewLayout()
         
-        taskCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: collectionCellId)
+        taskCollectionView.register(CollectionCellView.self, forCellWithReuseIdentifier: collectionCellId)
         todayTableView.register(UITableViewCell.self, forCellReuseIdentifier: tableViewCellId)
         
         

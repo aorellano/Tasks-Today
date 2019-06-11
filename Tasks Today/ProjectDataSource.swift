@@ -12,6 +12,9 @@ import UIKit
 class ProjectDataSource: NSObject, UICollectionViewDataSource, UITableViewDataSource {
 
     let homeView = HomeView()
+    var tasks = [String]()
+    
+    //CollectionView DataSource
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
@@ -22,10 +25,12 @@ class ProjectDataSource: NSObject, UICollectionViewDataSource, UITableViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = homeView.taskCollectionView.dequeueReusableCell(withReuseIdentifier: homeView.collectionCellId, for: indexPath)
-        cell.backgroundColor = .white
+        let cell = homeView.taskCollectionView.dequeueReusableCell(withReuseIdentifier: homeView.collectionCellId, for: indexPath) as! CollectionCellView
+        
         return cell
     }
+    
+    //TableView DataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
