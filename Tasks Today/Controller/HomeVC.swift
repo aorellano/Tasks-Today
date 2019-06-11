@@ -11,8 +11,8 @@ import UIKit
 class HomeVC: UIViewController, UITextFieldDelegate {
 
     let homeView = HomeView()
-    let dataSource = CollectionViewDataSource()
-    let delegate = CollectionViewDelegate()
+    let dataSource = ProjectDataSource()
+//    let delegate = ProjectDelegate()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +20,7 @@ class HomeVC: UIViewController, UITextFieldDelegate {
         view.backgroundColor = .red
         homeView.textField.delegate = self
         homeView.taskCollectionView.dataSource = dataSource
-        homeView.taskCollectionView.delegate = delegate
+        homeView.todayTableView.dataSource = dataSource
     }
     
     override func loadView() {
