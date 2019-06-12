@@ -11,6 +11,7 @@ import UIKit
 
 class TaskView: UIView {
     let cellId = "taskCell"
+    let headerId = "sectionHeader"
     let textField = CustomTextField()
     var taskName = CustomLabel()
     
@@ -28,6 +29,7 @@ class TaskView: UIView {
         
         textField.placeholder = "Enter item"
         taskTableView.register(TaskTableCell.self, forCellReuseIdentifier: cellId)
+        taskTableView.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: headerId)
         
         textFieldConstraints()
         taskNameConstraints()
@@ -56,8 +58,6 @@ class TaskView: UIView {
         taskTableView.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: -10).isActive = true
         taskTableView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
-    
-
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
