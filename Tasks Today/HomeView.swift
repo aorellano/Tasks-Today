@@ -15,18 +15,8 @@ class HomeView: UIView {
     let flowLayout = UICollectionViewFlowLayout()
     var tasksLabel = CustomLabel()
     var todayLabel = CustomLabel()
-    
-    var textField: UITextField = {
-        let tf = UITextField()
-        tf.borderStyle = .roundedRect
-        tf.backgroundColor = .white
-        tf.layer.masksToBounds = false
-        tf.textAlignment = .center
-        tf.placeholder = "Enter Task"
-        tf.translatesAutoresizingMaskIntoConstraints = false
-        return tf
-    }()
-    
+    var textField = CustomTextField()
+
     var todayTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.layer.cornerRadius = 10.0
@@ -41,7 +31,7 @@ class HomeView: UIView {
         
         collectionViewLayout()
         
-        taskCollectionView.register(CollectionCellView.self, forCellWithReuseIdentifier: collectionCellId)
+        taskCollectionView.register(TaskCollectionCell.self, forCellWithReuseIdentifier: collectionCellId)
         todayTableView.register(UITableViewCell.self, forCellReuseIdentifier: tableViewCellId)
         
         
@@ -56,7 +46,7 @@ class HomeView: UIView {
         flowLayout.itemSize = CGSize(width: 150, height: 200)
         flowLayout.scrollDirection = .horizontal
         taskCollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        taskCollectionView.backgroundColor = .green
+        taskCollectionView.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
     }
     
     func textFieldConstraints() {

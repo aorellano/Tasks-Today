@@ -1,31 +1,33 @@
 //
-//  CollectionViewDateSource.swift
+//  HomeDataSource.swift
 //  Tasks Today
 //
-//  Created by Alexis Orellano on 6/9/19.
+//  Created by Alexis Orellano on 6/12/19.
 //  Copyright © 2019 Alexis Orellano. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class ProjectDataSource: NSObject, UICollectionViewDataSource, UITableViewDataSource {
-
+class HomeDataSource: NSObject, UICollectionViewDataSource, UITableViewDataSource {
+    
     let homeView = HomeView()
-    var tasks = [String]()
+    var tasks = [Task]()
     
     //CollectionView DataSource
-
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return tasks.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = homeView.taskCollectionView.dequeueReusableCell(withReuseIdentifier: homeView.collectionCellId, for: indexPath) as! CollectionCellView
+        let cell = homeView.taskCollectionView.dequeueReusableCell(withReuseIdentifier: homeView.collectionCellId, for: indexPath) as! TaskCollectionCell
+        let cellData = tasks[indexPath.row]
+        cell.cellData = cellData
         
         return cell
     }

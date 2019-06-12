@@ -1,15 +1,22 @@
 //
-//  CollectionCellView.swift
+//  TaskCollectionCell.swift
 //  Tasks Today
 //
-//  Created by Alexis Orellano on 6/11/19.
+//  Created by Alexis Orellano on 6/12/19.
 //  Copyright © 2019 Alexis Orellano. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class CollectionCellView: UICollectionViewCell {
+class TaskCollectionCell: UICollectionViewCell {
+    
+    var cellData: Task! {
+        didSet {
+            taskName.text = cellData.taskName
+            numberLabel.text = "\(cellData.itemNumber)"
+        }
+    }
     
     var taskName: UILabel = {
         let label = UILabel()
@@ -49,6 +56,10 @@ class CollectionCellView: UICollectionViewCell {
         circleImageConstraints()
         numberLabelConstraints()
         itemsLabelConstraints()
+    }
+    
+    override func layoutSubviews() {
+        layer.cornerRadius = 5
     }
     
     func taskNameConstraints(){

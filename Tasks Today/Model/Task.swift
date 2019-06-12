@@ -10,9 +10,7 @@ import Foundation
 import UIKit
 
 struct Task {
-    var items: UILabel
-    var circle: UIImage
-    var taskName: UILabel
-    var itemLabel: UILabel
+    var taskName: String
+    var itemNumber: Int
 }
 

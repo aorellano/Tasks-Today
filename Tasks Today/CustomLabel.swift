@@ -13,11 +13,12 @@ class CustomLabel: UILabel {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        buttonLayout()
+        labelLayout()
     }
 
-    func buttonLayout(){
+    func labelLayout(){
         self.translatesAutoresizingMaskIntoConstraints = false
+        self.font = UIFont(name: "HelveticaNeue-Medium", size: 20)
         self.textColor = .darkGray
     }
     
