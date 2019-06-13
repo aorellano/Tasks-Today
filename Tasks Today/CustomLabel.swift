@@ -15,7 +15,7 @@ class CustomLabel: UILabel {
         
         labelLayout()
     }
-
+    
     func labelLayout(){
         self.translatesAutoresizingMaskIntoConstraints = false
         self.font = UIFont(name: "HelveticaNeue-Medium", size: 20)

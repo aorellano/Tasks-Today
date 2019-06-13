@@ -23,7 +23,7 @@ class TaskDataSource: NSObject, UITableViewDataSource {
 //        }
 //        return (sectionItems[section].items.count)
         
-        return 5
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -37,4 +37,5 @@ class TaskDataSource: NSObject, UITableViewDataSource {
         
         return cell
     }
+    
 }

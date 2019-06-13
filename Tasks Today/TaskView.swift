@@ -19,7 +19,8 @@ class TaskView: UIView {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.layer.cornerRadius = 10.0
         tableView.clipsToBounds = true
-        tableView.backgroundColor = .blue
+        tableView.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
+//
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -29,7 +30,7 @@ class TaskView: UIView {
         
         textField.placeholder = "Enter item"
         taskTableView.register(TaskTableCell.self, forCellReuseIdentifier: cellId)
-        taskTableView.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: headerId)
+        taskTableView.register(TaskHeader.self, forHeaderFooterViewReuseIdentifier: headerId)
         
         textFieldConstraints()
         taskNameConstraints()

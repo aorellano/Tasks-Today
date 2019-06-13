@@ -22,6 +22,8 @@
 		D0DFD69322B1A0C5009A6628 /* TaskTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DFD69222B1A0C5009A6628 /* TaskTableCell.swift */; };
 		D0DFD69522B1A115009A6628 /* HomeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DFD69422B1A115009A6628 /* HomeDataSource.swift */; };
 		D0DFD69722B1B76D009A6628 /* TaskDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DFD69622B1B76D009A6628 /* TaskDelegate.swift */; };
+		D0DFD69922B1BC97009A6628 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DFD69822B1BC97009A6628 /* Todo.swift */; };
+		D0DFD69B22B1C2AD009A6628 /* TaskHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DFD69A22B1C2AD009A6628 /* TaskHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		D0DFD69222B1A0C5009A6628 /* TaskTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableCell.swift; sourceTree = "<group>"; };
 		D0DFD69422B1A115009A6628 /* HomeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataSource.swift; sourceTree = "<group>"; };
 		D0DFD69622B1B76D009A6628 /* TaskDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDelegate.swift; sourceTree = "<group>"; };
+		D0DFD69822B1BC97009A6628 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
+		D0DFD69A22B1C2AD009A6628 /* TaskHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				D0DFD68022B04069009A6628 /* Task.swift */,
+				D0DFD69822B1BC97009A6628 /* Todo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -109,6 +114,7 @@
 				D0DFD68922B18A96009A6628 /* TaskView.swift */,
 				D0DFD69022B1A073009A6628 /* TaskCollectionCell.swift */,
 				D0DFD69222B1A0C5009A6628 /* TaskTableCell.swift */,
+				D0DFD69A22B1C2AD009A6628 /* TaskHeader.swift */,
 				D0DFD67E22AF8B6A009A6628 /* CustomLabel.swift */,
 				D0DFD68722B18983009A6628 /* CustomTextField.swift */,
 			);
@@ -205,12 +211,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0DFD65F22AC5E8F009A6628 /* HomeVC.swift in Sources */,
+				D0DFD69B22B1C2AD009A6628 /* TaskHeader.swift in Sources */,
 				D0DFD67F22AF8B6A009A6628 /* CustomLabel.swift in Sources */,
 				D0DFD69122B1A073009A6628 /* TaskCollectionCell.swift in Sources */,
 				D0DFD69322B1A0C5009A6628 /* TaskTableCell.swift in Sources */,
 				D0DFD68522B0873F009A6628 /* TaskVC.swift in Sources */,
 				D0DFD68822B18983009A6628 /* CustomTextField.swift in Sources */,
 				D0DFD68C22B18E39009A6628 /* TaskDataSource.swift in Sources */,
+				D0DFD69922B1BC97009A6628 /* Todo.swift in Sources */,
 				D0DFD65D22AC5E8F009A6628 /* AppDelegate.swift in Sources */,
 				D0DFD67122AD9DCC009A6628 /* HomeView.swift in Sources */,
 				D0DFD69522B1A115009A6628 /* HomeDataSource.swift in Sources */,
