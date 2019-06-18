@@ -23,14 +23,11 @@ class TaskVC: UIViewController, UITextFieldDelegate, UITableViewDelegate {
         taskView.taskTableView.delegate = self
         
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        
         let edgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(screenEdgeSwiped))
         edgePan.edges = .left
-        
         view.addGestureRecognizer(edgePan)
         
-        taskView.selectorClosure = { print("Selector called") }
-        taskView.setTodo()
+        addTodo()
     }
     
     override func loadView() {
@@ -43,40 +40,31 @@ class TaskVC: UIViewController, UITextFieldDelegate, UITableViewDelegate {
             present(home, animated: true)
         }
     }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        view.endEditing(true)
-        guard let item = textField.text else { return false }
-        if item != "" {
-            //taskView.setTodo()
-            dataSource.todoItems.append(Todo(taskName: item, isChecked: false))
-//            let todo = Todo(taskName: item, isChecked: false)
-//            dataSource.sectionItems.append(ExpandableItems(isExpanded: false, todoItems:[todo]))
-//            
-            //dataSource.todoItems.append(Todo(taskName: item, isChecked: false))
-            //dataSource.sectionItems[0].todoItems.append(Todo(taskName: item, isChecked: false))
-            //dataSource.sectionItems[0].isExpanded = false
-            //dataSource.todoItems.append(Todo(taskName: item, isChecked: false))
-            //var todo = Todo(taskName: item, isChecked: false)
-            //dataSource.sectionItems.append(ExpandableItems(isExpanded: false, todoItems: [todo]))
-            //dataSource.items.append(Todo(isExpanded: false, checkbox: true, taskNames: [item], date: Date))
-            //print((dataSource.sectionItems) )
-            print("textField")
-            print(dataSource.todoItems)
-            //print(dataSource.sectionItems.count)
+
+    func addTodo() {
+        taskView.selectorClosure = {
+            print("Selector called")
+            let itemName = self.taskView.textField.text ?? "Blank"
+            let date = self.taskView.datePicker.date as NSDate
+            if itemName != "" {
+                print(itemName)
+                //self.dataSource.todoItems.append(Todo(taskName: itemName, isChecked: false))
+                self.dataSource.sectionItems.append(ExpandableItems(isExpanded: false, todoItem: Todo(taskName: itemName, isChecked: false), todoDate: date))
+            }
+            self.taskView.taskTableView.reloadData()
+            self.taskView.textField.text = ""
         }
-        taskView.taskTableView.reloadData()
-        textField.text = ""
-        return false
+        self.taskView.setTodo()
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let taskHeader = taskView.taskTableView.dequeueReusableHeaderFooterView(withIdentifier: taskView.headerId) as! TaskHeader
         print("Out of order index")
         print(dataSource.todoItems.count)
-        print()
-                let headerData = dataSource.todoItems
-                taskHeader.headerData = headerData[section]
+        
+        let headerData = dataSource.sectionItems[section].todoItem
+                //let headerData = dataSource.todoItems
+        taskHeader.headerData = headerData
         
         //        let headerData = dataSource.todoItems[section]
         //        taskHeader.headerData = headerData
@@ -105,19 +93,19 @@ class TaskVC: UIViewController, UITextFieldDelegate, UITableViewDelegate {
         print("Section Header Pressed")
         let section = button.tag
         var indexPaths = [IndexPath]()
-        
-        for row in dataSource.sectionItems[section].todoItems.indices {
-            let indexPath = IndexPath(row: row, section: section)
-            indexPaths.append(indexPath)
-        }
-        let isExpanded = dataSource.sectionItems[section].isExpanded
-        dataSource.sectionItems[section].isExpanded = !isExpanded
-        
-        if isExpanded{
-            taskView.taskTableView.deleteRows(at: indexPaths, with: .fade)
-        }else{
-            taskView.taskTableView.insertRows(at: indexPaths, with: .fade)
-        }
+
+//        for row in dataSource.sectionItems[section].todoItems.indices {
+//            let indexPath = IndexPath(row: row, section: section)
+//            indexPaths.append(indexPath)
+//        }
+//        let isExpanded = dataSource.sectionItems[section].isExpanded
+//        dataSource.sectionItems[section].isExpanded = !isExpanded
+//
+//        if isExpanded{
+//            taskView.taskTableView.deleteRows(at: indexPaths, with: .fade)
+//        }else{
+//            taskView.taskTableView.insertRows(at: indexPaths, with: .fade)
+//        }
     }
 }
 

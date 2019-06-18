@@ -17,8 +17,6 @@ class TaskView: UIView {
     var datePicker = UIDatePicker()
     var selectorClosure: (() -> Void)?
     
-    
-
     var taskTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.layer.cornerRadius = 10.0

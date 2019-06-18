@@ -11,6 +11,12 @@ import UIKit
 
 class TaskTableCell: UITableViewCell {
     
+    var taskDataCell: ExpandableItems! {
+        didSet {
+            dateLabel.text = "\(taskDataCell.todoDate)"
+        }
+    }
+    
     var dateLabel: UILabel = {
         let date = UILabel()
         date.translatesAutoresizingMaskIntoConstraints = false

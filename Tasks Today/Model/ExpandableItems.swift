@@ -11,5 +11,6 @@ import UIKit
 
 struct ExpandableItems {
     var isExpanded: Bool
-    var todoItems: [Todo]
+    var todoItem: Todo
+    var todoDate: NSDate
 }
