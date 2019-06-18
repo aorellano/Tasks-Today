@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 class HomeDataSource: NSObject, UICollectionViewDataSource, UITableViewDataSource {
-    
     let homeView = HomeView()
     var tasks = [Task]()
     

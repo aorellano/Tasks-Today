@@ -43,6 +43,7 @@ class HomeVC: UIViewController, UITextFieldDelegate, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let taskVC = TaskVC()
+        print("Going to next viewcontroller")
         self.present(taskVC, animated: true)
     }
 }

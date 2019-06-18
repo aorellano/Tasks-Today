@@ -10,8 +10,20 @@ import Foundation
 import UIKit
 
 class TaskHeader: UITableViewHeaderFooterView {
+    var headerData: Todo! {
+        didSet{
+            itemLabel.text = headerData.taskName
+            //let todoItem = headerData.todoItems
+            //itemLabel.text = todoItem.taskName
+        }
+    }
     
-
+//    var headerData: Todo! {
+//        didSet {
+//            itemLabel.text = headerData.taskName
+//        }
+//    }
+    
     var expandButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .clear
@@ -28,7 +40,7 @@ class TaskHeader: UITableViewHeaderFooterView {
         return box
         
     }()
-    var subjectLabel: UILabel = {
+    var itemLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.text = "Create a wireframe"
@@ -37,12 +49,11 @@ class TaskHeader: UITableViewHeaderFooterView {
         return label
     }()
     
-
-    
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         
         backgroundColor = .purple
+        //expandButton.addTarget(TaskVC.self, action: TaskVC.expandSection(<#T##TaskVC#>), for: <#T##UIControl.Event#>)
         contentViewLayout()
         checkBoxConstraints()
         subjectLabelConstraints()
@@ -68,10 +79,10 @@ class TaskHeader: UITableViewHeaderFooterView {
     }
     
     func subjectLabelConstraints(){
-        contentView.addSubview(subjectLabel)
+        contentView.addSubview(itemLabel)
         
-        subjectLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        subjectLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        itemLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        itemLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
     }
     func expandButtonConstraints(){
         contentView.addSubview(expandButton)
