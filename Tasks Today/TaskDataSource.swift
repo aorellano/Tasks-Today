@@ -24,11 +24,9 @@ class TaskDataSource: NSObject, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if !sectionItems[section].isExpanded {
-//            return 0
-//        }
-//        return (sectionItems[section].items.count)
-        
+        if sectionItems[section].isExpanded {
+            return 0
+        }
         return 1
     }
     

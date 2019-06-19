@@ -13,7 +13,8 @@ class TaskTableCell: UITableViewCell {
     
     var taskDataCell: ExpandableItems! {
         didSet {
-            dateLabel.text = "\(taskDataCell.todoDate)"
+            //cell.dateFormatter.string(from: item.time! as Date)
+            dateLabel.text = dateFormatter.string(from: taskDataCell.todoDate as Date)
         }
     }
     
@@ -24,6 +25,12 @@ class TaskTableCell: UITableViewCell {
         date.text = "Due: Today at 12:00 PM"
         date.font = UIFont(name: "Arial", size: 12)
         return date
+    }()
+    
+    let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "M/dd/yy, h:mm a"
+        return formatter
     }()
     
     var notesLabel: UILabel = {

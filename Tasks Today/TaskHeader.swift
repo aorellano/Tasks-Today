@@ -18,12 +18,6 @@ class TaskHeader: UITableViewHeaderFooterView {
         }
     }
     
-//    var headerData: Todo! {
-//        didSet {
-//            itemLabel.text = headerData.taskName
-//        }
-//    }
-    
     var expandButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .clear

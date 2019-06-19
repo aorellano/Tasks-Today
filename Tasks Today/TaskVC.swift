@@ -43,17 +43,20 @@ class TaskVC: UIViewController, UITextFieldDelegate, UITableViewDelegate {
 
     func addTodo() {
         taskView.selectorClosure = {
+            self.view.endEditing(true)
             print("Selector called")
             let itemName = self.taskView.textField.text ?? "Blank"
             let date = self.taskView.datePicker.date as NSDate
             if itemName != "" {
                 print(itemName)
                 //self.dataSource.todoItems.append(Todo(taskName: itemName, isChecked: false))
-                self.dataSource.sectionItems.append(ExpandableItems(isExpanded: false, todoItem: Todo(taskName: itemName, isChecked: false), todoDate: date))
+                self.dataSource.sectionItems.append(ExpandableItems(isExpanded: true, todoItem: Todo(taskName: itemName, isChecked: false), todoDate: date))
             }
             self.taskView.taskTableView.reloadData()
             self.taskView.textField.text = ""
+            
         }
+        
         self.taskView.setTodo()
     }
     
@@ -93,19 +96,30 @@ class TaskVC: UIViewController, UITextFieldDelegate, UITableViewDelegate {
         print("Section Header Pressed")
         let section = button.tag
         var indexPaths = [IndexPath]()
-
-//        for row in dataSource.sectionItems[section].todoItems.indices {
-//            let indexPath = IndexPath(row: row, section: section)
-//            indexPaths.append(indexPath)
-//        }
-//        let isExpanded = dataSource.sectionItems[section].isExpanded
-//        dataSource.sectionItems[section].isExpanded = !isExpanded
-//
-//        if isExpanded{
-//            taskView.taskTableView.deleteRows(at: indexPaths, with: .fade)
-//        }else{
-//            taskView.taskTableView.insertRows(at: indexPaths, with: .fade)
-//        }
+        
+        for row in 0..<1{
+            print(row)
+            let indexPath = IndexPath(row: row, section: section)
+            indexPaths.append(indexPath)
+        }
+        
+        let isExpanded = dataSource.sectionItems[section].isExpanded
+        dataSource.sectionItems[section].isExpanded = !isExpanded
+        print(isExpanded)
+        
+        if isExpanded{
+            taskView.taskTableView.insertRows(at: indexPaths, with: .fade)
+            //taskView.taskTableView.reloadData()
+        } else{
+            taskView.taskTableView.deleteRows(at: indexPaths, with: .fade)
+            //taskView.taskTableView.reloadData()
+        }
+        
+        
     }
 }
+
+
+
+
 
