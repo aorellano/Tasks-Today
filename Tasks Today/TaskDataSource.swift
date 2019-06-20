@@ -33,8 +33,12 @@ class TaskDataSource: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = taskView.taskTableView.dequeueReusableCell(withIdentifier: taskView.cellId, for: indexPath) as! TaskTableCell
         
+
+        
         let taskDataCell = sectionItems[indexPath.section]
         cell.taskDataCell = taskDataCell
+        
+        
 //        let cellData = todoItems[indexPath.row]
 //        
 //        cell.cellData = cellData

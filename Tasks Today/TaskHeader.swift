@@ -12,7 +12,7 @@ import UIKit
 class TaskHeader: UITableViewHeaderFooterView {
     var headerData: Todo! {
         didSet{
-            itemLabel.text = headerData.taskName
+            itemLabel.text = headerData.todoName
             //let todoItem = headerData.todoItems
             //itemLabel.text = todoItem.taskName
         }
@@ -43,6 +43,15 @@ class TaskHeader: UITableViewHeaderFooterView {
         return label
     }()
     
+    var dateLabel: UILabel = {
+        let date = UILabel()
+        date.translatesAutoresizingMaskIntoConstraints = false
+        date.textColor = .black
+        date.text = "Due: Today at 12:00 PM"
+        date.font = UIFont(name: "Arial", size: 12)
+        return date
+    }()
+    
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         
@@ -51,6 +60,7 @@ class TaskHeader: UITableViewHeaderFooterView {
         contentViewLayout()
         checkBoxConstraints()
         subjectLabelConstraints()
+        dateLabelConstraints()
         expandButtonConstraints()
     }
     
@@ -78,6 +88,11 @@ class TaskHeader: UITableViewHeaderFooterView {
         itemLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         itemLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
     }
+    func dateLabelConstraints() {
+        contentView.addSubview(dateLabel)
+
+    }
+    
     func expandButtonConstraints(){
         contentView.addSubview(expandButton)
         
@@ -86,6 +101,8 @@ class TaskHeader: UITableViewHeaderFooterView {
         expandButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         expandButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
     }
+    
+
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

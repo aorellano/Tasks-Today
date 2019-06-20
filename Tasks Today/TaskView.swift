@@ -11,7 +11,6 @@ import UIKit
 
 class TaskView: UIView {
     let cellId = "taskCell"
-    let headerId = "sectionHeader"
     let textField = CustomTextField()
     var taskName = CustomLabel()
     var datePicker = UIDatePicker()
@@ -33,7 +32,6 @@ class TaskView: UIView {
         textField.inputAccessoryView = firstInputView()
         datePicker.datePickerMode = .date
         taskTableView.register(TaskTableCell.self, forCellReuseIdentifier: cellId)
-        taskTableView.register(TaskHeader.self, forHeaderFooterViewReuseIdentifier: headerId)
         
         textFieldConstraints()
         taskNameConstraints()

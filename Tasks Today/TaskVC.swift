@@ -9,9 +9,10 @@
 import Foundation
 import UIKit
 
-class TaskVC: UIViewController, UITextFieldDelegate, UITableViewDelegate {
+class TaskVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, UITableViewDelegate {
     let taskView = TaskView()
     let dataSource = TaskDataSource()
+    let cell = TaskTableCell()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +22,7 @@ class TaskVC: UIViewController, UITextFieldDelegate, UITableViewDelegate {
         taskView.textField.delegate = self
         taskView.taskTableView.dataSource = dataSource
         taskView.taskTableView.delegate = self
+        cell.notesView.delegate = self
         
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         let edgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(screenEdgeSwiped))
@@ -50,27 +52,20 @@ class TaskVC: UIViewController, UITextFieldDelegate, UITableViewDelegate {
             if itemName != "" {
                 print(itemName)
                 //self.dataSource.todoItems.append(Todo(taskName: itemName, isChecked: false))
-                self.dataSource.sectionItems.append(ExpandableItems(isExpanded: true, todoItem: Todo(taskName: itemName, isChecked: false), todoDate: date))
+                self.dataSource.sectionItems.append(ExpandableItems(isExpanded: true, todoItem: Todo(todoName: itemName, isChecked: false), todoDescription: Description(todoDate: date, todoNotes: "Enter...")))
             }
             self.taskView.taskTableView.reloadData()
             self.taskView.textField.text = ""
-            
         }
-        
         self.taskView.setTodo()
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let taskHeader = taskView.taskTableView.dequeueReusableHeaderFooterView(withIdentifier: taskView.headerId) as! TaskHeader
-        print("Out of order index")
         print(dataSource.todoItems.count)
         
         let headerData = dataSource.sectionItems[section].todoItem
-                //let headerData = dataSource.todoItems
         taskHeader.headerData = headerData
-        
-        //        let headerData = dataSource.todoItems[section]
-        //        taskHeader.headerData = headerData
         
         taskHeader.expandButton.tag = section
         //taskHeader.itemLabel.text = todoItems[section].taskName
@@ -78,7 +73,6 @@ class TaskVC: UIViewController, UITextFieldDelegate, UITableViewDelegate {
         //        subjectHeader.expandButton.tag = section
         //        subjectHeader.subjectLabel.text = subjects[section]
         //        subjectHeader.addButton.tag = section
-        //        subjectHeader.expandButton.addTarget(self, action: #selector(expandSection), for: .touchUpInside)
         //        subjectHeader.addButton.addTarget(self, action: #selector(createItem), for: .touchUpInside)
         
         return taskHeader
@@ -92,8 +86,16 @@ class TaskVC: UIViewController, UITextFieldDelegate, UITableViewDelegate {
         return 70
     }
     
+    func textViewDidEndEditing(_ textView: UITextView) {
+         print(textView.text!)
+    }
+    func textViewDidChange(_ textView: UITextView) {
+        print(textView.text!)
+    }
+    
     @objc func expandSection(_ button: UIButton){
         print("Section Header Pressed")
+        print(cell.notesView.text!)
         let section = button.tag
         var indexPaths = [IndexPath]()
         
@@ -114,8 +116,6 @@ class TaskVC: UIViewController, UITextFieldDelegate, UITableViewDelegate {
             taskView.taskTableView.deleteRows(at: indexPaths, with: .fade)
             //taskView.taskTableView.reloadData()
         }
-        
-        
     }
 }
 

@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 struct Todo {
-    var taskName: String
+    var todoName: String
     var isChecked: Bool
+    var todoDate: NSDate
 }

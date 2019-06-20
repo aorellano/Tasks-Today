@@ -13,8 +13,8 @@ class TaskTableCell: UITableViewCell {
     
     var taskDataCell: ExpandableItems! {
         didSet {
-            //cell.dateFormatter.string(from: item.time! as Date)
-            dateLabel.text = dateFormatter.string(from: taskDataCell.todoDate as Date)
+            dateLabel.text = dateFormatter.string(from: taskDataCell.todoDescription.todoDate as Date)
+            notesView.text = taskDataCell.todoDescription.todoNotes
         }
     }
     
