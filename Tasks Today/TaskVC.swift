@@ -9,10 +9,9 @@
 import Foundation
 import UIKit
 
-class TaskVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, UITableViewDelegate {
+class TaskVC: UIViewController, UITextFieldDelegate, UITableViewDelegate{
     let taskView = TaskView()
     let dataSource = TaskDataSource()
-    let cell = TaskTableCell()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +21,6 @@ class TaskVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, UITable
         taskView.textField.delegate = self
         taskView.taskTableView.dataSource = dataSource
         taskView.taskTableView.delegate = self
-        cell.notesView.delegate = self
         
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         let edgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(screenEdgeSwiped))
@@ -42,7 +40,7 @@ class TaskVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, UITable
             present(home, animated: true)
         }
     }
-
+    
     func addTodo() {
         taskView.selectorClosure = {
             self.view.endEditing(true)
@@ -50,9 +48,7 @@ class TaskVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, UITable
             let itemName = self.taskView.textField.text ?? "Blank"
             let date = self.taskView.datePicker.date as NSDate
             if itemName != "" {
-                print(itemName)
-                //self.dataSource.todoItems.append(Todo(taskName: itemName, isChecked: false))
-                self.dataSource.sectionItems.append(ExpandableItems(isExpanded: true, todoItem: Todo(todoName: itemName, isChecked: false), todoDescription: Description(todoDate: date, todoNotes: "Enter...")))
+                self.dataSource.sectionItems.append(ExpandableItems(isExpanded: true, todoItem: Todo(todoName: itemName, todoDate: date, isChecked: false), notes: ""))
             }
             self.taskView.taskTableView.reloadData()
             self.taskView.textField.text = ""
@@ -62,40 +58,23 @@ class TaskVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let taskHeader = taskView.taskTableView.dequeueReusableHeaderFooterView(withIdentifier: taskView.headerId) as! TaskHeader
-        print(dataSource.todoItems.count)
-        
         let headerData = dataSource.sectionItems[section].todoItem
         taskHeader.headerData = headerData
-        
         taskHeader.expandButton.tag = section
-        //taskHeader.itemLabel.text = todoItems[section].taskName
         taskHeader.expandButton.addTarget(self, action: #selector(expandSection), for: .touchUpInside)
-        //        subjectHeader.expandButton.tag = section
-        //        subjectHeader.subjectLabel.text = subjects[section]
-        //        subjectHeader.addButton.tag = section
-        //        subjectHeader.addButton.addTarget(self, action: #selector(createItem), for: .touchUpInside)
-        
         return taskHeader
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        return 300
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 70
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-         print(textView.text!)
-    }
-    func textViewDidChange(_ textView: UITextView) {
-        print(textView.text!)
+        return 85
     }
     
     @objc func expandSection(_ button: UIButton){
         print("Section Header Pressed")
-        print(cell.notesView.text!)
         let section = button.tag
         var indexPaths = [IndexPath]()
         
@@ -111,11 +90,10 @@ class TaskVC: UIViewController, UITextFieldDelegate, UITextViewDelegate, UITable
         
         if isExpanded{
             taskView.taskTableView.insertRows(at: indexPaths, with: .fade)
-            //taskView.taskTableView.reloadData()
         } else{
             taskView.taskTableView.deleteRows(at: indexPaths, with: .fade)
-            //taskView.taskTableView.reloadData()
         }
+        
     }
 }
 

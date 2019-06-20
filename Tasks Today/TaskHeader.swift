@@ -13,11 +13,9 @@ class TaskHeader: UITableViewHeaderFooterView {
     var headerData: Todo! {
         didSet{
             itemLabel.text = headerData.todoName
-            //let todoItem = headerData.todoItems
-            //itemLabel.text = todoItem.taskName
+            itemDate.text = dateFormatter.string(from: headerData.todoDate as Date)
         }
     }
-    
     var expandButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .clear
@@ -32,8 +30,8 @@ class TaskHeader: UITableViewHeaderFooterView {
         box.setImage(checked, for: .selected)
         box.translatesAutoresizingMaskIntoConstraints = false
         return box
-        
     }()
+    
     var itemLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
@@ -43,24 +41,29 @@ class TaskHeader: UITableViewHeaderFooterView {
         return label
     }()
     
-    var dateLabel: UILabel = {
-        let date = UILabel()
-        date.translatesAutoresizingMaskIntoConstraints = false
-        date.textColor = .black
-        date.text = "Due: Today at 12:00 PM"
-        date.font = UIFont(name: "Arial", size: 12)
-        return date
+    var itemDate: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.text = "12:00"
+        label.font = UIFont(name: "Arial", size: 10)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "M/dd/yy, h:mm a"
+        return formatter
     }()
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         
         backgroundColor = .purple
-        //expandButton.addTarget(TaskVC.self, action: TaskVC.expandSection(<#T##TaskVC#>), for: <#T##UIControl.Event#>)
         contentViewLayout()
         checkBoxConstraints()
-        subjectLabelConstraints()
-        dateLabelConstraints()
+        itemLabelConstraints()
+        itemDateConstraints()
         expandButtonConstraints()
     }
     
@@ -75,34 +78,31 @@ class TaskHeader: UITableViewHeaderFooterView {
     }
     func checkBoxConstraints(){
         addSubview(checkBox)
-        
         checkBox.heightAnchor.constraint(equalToConstant: 22).isActive = true
         checkBox.widthAnchor.constraint(equalToConstant: 22).isActive = true
         checkBox.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15).isActive = true
         checkBox.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
     }
     
-    func subjectLabelConstraints(){
+    func itemLabelConstraints(){
         contentView.addSubview(itemLabel)
-        
-        itemLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        itemLabel.leadingAnchor.constraint(equalTo: checkBox.trailingAnchor, constant: 10).isActive = true
         itemLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
     }
-    func dateLabelConstraints() {
-        contentView.addSubview(dateLabel)
-
+    
+    func itemDateConstraints(){
+        contentView.addSubview(itemDate)
+        itemDate.leadingAnchor.constraint(equalTo: itemLabel.leadingAnchor).isActive = true
+        itemDate.topAnchor.constraint(equalTo: itemLabel.bottomAnchor).isActive = true
     }
     
     func expandButtonConstraints(){
         contentView.addSubview(expandButton)
-        
         expandButton.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         expandButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         expandButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         expandButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
     }
-    
-
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

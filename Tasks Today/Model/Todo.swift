@@ -11,6 +11,6 @@ import UIKit
 
 struct Todo {
     var todoName: String
-    var isChecked: Bool
     var todoDate: NSDate
+    var isChecked: Bool
 }

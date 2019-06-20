@@ -23,6 +23,7 @@
 		D0DFD69522B1A115009A6628 /* HomeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DFD69422B1A115009A6628 /* HomeDataSource.swift */; };
 		D0DFD69922B1BC97009A6628 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DFD69822B1BC97009A6628 /* Todo.swift */; };
 		D0DFD69B22B1C2AD009A6628 /* TaskHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DFD69A22B1C2AD009A6628 /* TaskHeader.swift */; };
+		D0DFD6A722BC43BF009A6628 /* ExpandableItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DFD6A622BC43BF009A6628 /* ExpandableItems.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		D0DFD69422B1A115009A6628 /* HomeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataSource.swift; sourceTree = "<group>"; };
 		D0DFD69822B1BC97009A6628 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		D0DFD69A22B1C2AD009A6628 /* TaskHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskHeader.swift; sourceTree = "<group>"; };
+		D0DFD6A622BC43BF009A6628 /* ExpandableItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableItems.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 			children = (
 				D0DFD68022B04069009A6628 /* Task.swift */,
 				D0DFD69822B1BC97009A6628 /* Todo.swift */,
+				D0DFD6A622BC43BF009A6628 /* ExpandableItems.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 				D0DFD68C22B18E39009A6628 /* TaskDataSource.swift in Sources */,
 				D0DFD69922B1BC97009A6628 /* Todo.swift in Sources */,
 				D0DFD65D22AC5E8F009A6628 /* AppDelegate.swift in Sources */,
+				D0DFD6A722BC43BF009A6628 /* ExpandableItems.swift in Sources */,
 				D0DFD67122AD9DCC009A6628 /* HomeView.swift in Sources */,
 				D0DFD69522B1A115009A6628 /* HomeDataSource.swift in Sources */,
 				D0DFD68122B04069009A6628 /* Task.swift in Sources */,
