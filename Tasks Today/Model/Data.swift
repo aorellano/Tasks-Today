@@ -7,8 +7,7 @@
 //
 
 import Foundation
-import UIKit
 
-struct Data {
+class Data {
     static var taskModels = [TaskModel]()
 }

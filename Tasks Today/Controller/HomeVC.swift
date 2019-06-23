@@ -7,7 +7,8 @@
 //
 
 import UIKit
-
+//Simple Theme
+//main font, background color, accent color, tint color
 class HomeVC: UIViewController, UITextFieldDelegate, UICollectionViewDelegate {
 
     let homeView = HomeView()
@@ -16,28 +17,40 @@ class HomeVC: UIViewController, UITextFieldDelegate, UICollectionViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        TaskFunctions.readTasks(completion: { [weak self] in
+            //This code is going to get passed into the readTasks function
+            self?.homeView.taskCollectionView.reloadData()
+        })
+        
         view.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
         homeView.textField.delegate = self
         homeView.taskCollectionView.dataSource = dataSource
         homeView.todayTableView.dataSource = dataSource
         homeView.taskCollectionView.delegate = self
+        
     }
     
     override func loadView() {
         view = homeView
     }
     
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
-        print("Hello")
+        textField.backgroundColor = .white
+        textField.placeholder = "Enter Task"
         guard let task = textField.text else { return false }
         if task != "" {
-            dataSource.tasks.append(Task(taskName: task, itemNumber: 0))
-            print(task)
-            print(dataSource.tasks)
+            TaskFunctions.createTask(taskModel: TaskModel(title: task, itemNumbers: 0))
+//            Data.taskModels.append(TaskModel(title: task, itemNumbers: 0))
+//            print(Data.taskModels)
+            homeView.taskCollectionView.reloadData()
+            textField.text = ""
+        } else {
+            textField.backgroundColor = UIColor(red: 255/255, green: 160/255, blue: 160/255, alpha: 1)
+            textField.placeholder = "Invalid entry"
         }
-        homeView.taskCollectionView.reloadData()
-        textField.text = ""
+        
         return false
     }
     

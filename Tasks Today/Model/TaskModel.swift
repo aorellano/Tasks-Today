@@ -1,17 +1,22 @@
 //
-//  Task.swift
+//  TaskModel.swift
 //  Tasks Today
 //
-//  Created by Alexis Orellano on 6/21/19.
+//  Created by Alexis Orellano on 6/22/19.
 //  Copyright © 2019 Alexis Orellano. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-struct TaskModel {
+class TaskModel {
     let id: UUID
     var title: String
-    var numberOfItems: Int
-    var todoModels = [Todo]()
+    var itemNumbers: Int
+    
+    init(title: String, itemNumbers: Int){
+        id = UUID()
+        self.title = title
+        self.itemNumbers = itemNumbers
+    }
 }

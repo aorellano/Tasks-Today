@@ -11,7 +11,6 @@ import UIKit
 
 class HomeDataSource: NSObject, UICollectionViewDataSource, UITableViewDataSource {
     let homeView = HomeView()
-    var tasks = [Task]()
     
     //CollectionView DataSource
     
@@ -20,13 +19,13 @@ class HomeDataSource: NSObject, UICollectionViewDataSource, UITableViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return tasks.count
+        return Data.taskModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = homeView.taskCollectionView.dequeueReusableCell(withReuseIdentifier: homeView.collectionCellId, for: indexPath) as! TaskCollectionCell
-        let cellData = tasks[indexPath.row]
-        cell.cellData = cellData
+        
+        cell.setup(taskModel: Data.taskModels[indexPath.row])
         
         return cell
     }

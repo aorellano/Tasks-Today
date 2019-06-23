@@ -60,7 +60,7 @@ class HomeView: UIView {
     func tasksLabelConstraints(){
         self.addSubview(tasksLabel)
         tasksLabel.text = "T A S K S"
-        tasksLabel.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 30).isActive = true
+        tasksLabel.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 25).isActive = true
         tasksLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15).isActive = true
         
     }
@@ -68,8 +68,8 @@ class HomeView: UIView {
     func collectionViewConstraints(){
         self.addSubview(taskCollectionView)
         taskCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        taskCollectionView.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        taskCollectionView.topAnchor.constraint(equalTo: tasksLabel.bottomAnchor, constant: 30).isActive = true
+        taskCollectionView.heightAnchor.constraint(equalToConstant: 210).isActive = true
+        taskCollectionView.topAnchor.constraint(equalTo: tasksLabel.bottomAnchor, constant: 25).isActive = true
         taskCollectionView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 15).isActive = true
         taskCollectionView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -15).isActive = true
     }
