@@ -84,7 +84,7 @@ class TaskCollectionCell: UICollectionViewCell {
         itemsLabel.topAnchor.constraint(equalTo: numberLabel.bottomAnchor).isActive = true
         itemsLabel.centerXAnchor.constraint(equalTo: numberLabel.centerXAnchor).isActive = true
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

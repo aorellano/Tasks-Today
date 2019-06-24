@@ -37,6 +37,7 @@ class HomeView: UIView {
         
         textFieldConstraints()
         tasksLabelConstraints()
+        
         collectionViewConstraints()
         todayLabelConstraints()
         tableViewConstraints()
@@ -89,7 +90,7 @@ class HomeView: UIView {
         todayTableView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -15).isActive = true
         todayTableView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

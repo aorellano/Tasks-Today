@@ -32,7 +32,7 @@ class TaskFunctions {
         
     }
     
-    static func deleteTasks(taskModel: TaskModel){
-        
+    static func deleteTasks(index: Int){
+        Data.taskModels.remove(at: index)
     }
 }
