@@ -26,6 +26,14 @@ class TaskView: UIView {
         return tableView
     }()
     
+    var deleteButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Delete", for: .normal)
+        button.backgroundColor = .red
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -37,6 +45,7 @@ class TaskView: UIView {
         
         textFieldConstraints()
         taskNameConstraints()
+        deleteButtonConstraints()
         taskTableViewConstraints()
     }
     
@@ -61,6 +70,13 @@ class TaskView: UIView {
         taskTableView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
         taskTableView.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: -10).isActive = true
         taskTableView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+    }
+    
+    func deleteButtonConstraints() {
+        self.addSubview(deleteButton)
+        
+        deleteButton.centerYAnchor.constraint(equalTo: taskName.centerYAnchor).isActive = true
+        deleteButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
     }
     
     func firstInputView() -> UIToolbar {

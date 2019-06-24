@@ -11,16 +11,15 @@ import UIKit
 
 class TaskCollectionCell: UICollectionViewCell {
     
-    var cellData: Task! {
-        didSet {
-            taskName.text = cellData.taskName
-            numberLabel.text = "\(cellData.itemNumber)"
-        }
+    func setup(taskModel: TaskModel){
+        taskName.text = taskModel.title
+        numberLabel.text = "\(taskModel.itemNumbers)"
     }
-    
+
     var taskName: UILabel = {
         let label = UILabel()
         label.text = "Task"
+        label.font = UIFont(name: "HelveticaNeue-Medium", size: 18)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -59,12 +58,12 @@ class TaskCollectionCell: UICollectionViewCell {
     }
     
     override func layoutSubviews() {
-        layer.cornerRadius = 5
+        layer.cornerRadius = 8
     }
     
     func taskNameConstraints(){
         self.addSubview(taskName)
-        taskName.topAnchor.constraint(equalTo: self.topAnchor, constant: 15).isActive = true
+        taskName.topAnchor.constraint(equalTo: self.topAnchor, constant: 20).isActive = true
         taskName.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     }
     
@@ -85,7 +84,7 @@ class TaskCollectionCell: UICollectionViewCell {
         itemsLabel.topAnchor.constraint(equalTo: numberLabel.bottomAnchor).isActive = true
         itemsLabel.centerXAnchor.constraint(equalTo: numberLabel.centerXAnchor).isActive = true
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

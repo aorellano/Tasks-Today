@@ -11,6 +11,7 @@ import UIKit
 
 class TaskVC: UIViewController, UITextFieldDelegate, UITableViewDelegate{
     let taskView = TaskView()
+    let homeView = HomeView()
     let dataSource = TaskDataSource()
     
     override func viewDidLoad() {
@@ -26,12 +27,46 @@ class TaskVC: UIViewController, UITextFieldDelegate, UITableViewDelegate{
         let edgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(screenEdgeSwiped))
         edgePan.edges = .left
         view.addGestureRecognizer(edgePan)
+        taskView.deleteButton.addTarget(self, action: #selector(deleteTask), for: .touchUpInside)
         
         addTodo()
     }
     
     override func loadView() {
         view = taskView
+    }
+    
+    @objc func deleteTask(){
+        print("attempting to delete task")
+        let ac = UIAlertController(title: "Are you sure you want to delete this task?", message: nil, preferredStyle: .alert)
+        let delete = UIAlertAction(title: "Delete", style: .default){ [weak self] _ in
+            print("Deleting the item")
+            
+            var indexPaths = [IndexPath]()
+            let section = 0
+            for row in 0..<1{
+                print(row)
+                let indexPath = IndexPath(row: row, section: section)
+                indexPaths.append(indexPath)
+            }
+            print(Data.taskModels)
+            TaskFunctions.deleteTasks(index: 0)
+            print(Data.taskModels)
+            
+//            self?.homeView.taskCollectionView.deleteItems(at: indexPaths)
+//            
+//            
+           // self?.homeView.taskCollectionView.reloadData()
+            let home = HomeVC()
+            self?.present(home, animated: true)
+        }
+        let cancel = UIAlertAction(title: "Canel", style: .cancel)
+        
+        
+        
+        ac.addAction(cancel)
+        ac.addAction(delete)
+        present(ac, animated: true)
     }
     
     @objc func screenEdgeSwiped(_ recognizer: UIScreenEdgePanGestureRecognizer) {
