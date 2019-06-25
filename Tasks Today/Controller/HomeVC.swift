@@ -67,7 +67,7 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate {
         let taskVC = TaskVC()
         let task = Data.taskModels[indexPath.row]
         taskVC.taskId = task.id
-        taskVC.taskNumber = indexPath.row
+        taskVC.taskIndex = indexPath.row
         print("Going to next viewcontroller")
         self.present(taskVC, animated: true)
     }

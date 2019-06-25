@@ -119,6 +119,7 @@ class TaskView: UIView {
     @objc func setTodo() {
         print("Trying to set the todo")
         self.selectorClosure?()
+
     }
     
     required init?(coder aDecoder: NSCoder) {

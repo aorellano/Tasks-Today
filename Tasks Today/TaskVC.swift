@@ -13,14 +13,14 @@ class TaskVC: UIViewController, UITextFieldDelegate{
     let taskView = TaskView()
     let homeView = HomeView()
     var taskId: UUID!
-    var taskNumber: Int!
+    var taskIndex: Int!
     var taskModel: TaskModel?
     var text: String!
     var expandState = MockData.createExpandedData()
+    var ctr = 0
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    fileprivate func updatesTableViewWithData() {
+
         TaskFunctions.readTask(by: taskId) { [weak self] (model) in
             guard let self = self else { return }
             self.taskModel = model
@@ -29,6 +29,12 @@ class TaskVC: UIViewController, UITextFieldDelegate{
             self.taskView.taskName.text = model.title
             self.taskView.taskTableView.reloadData()
         }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        updatesTableViewWithData()
         
         view.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
         
@@ -42,8 +48,10 @@ class TaskVC: UIViewController, UITextFieldDelegate{
         view.addGestureRecognizer(edgePan)
         taskView.deleteButton.addTarget(self, action: #selector(deleteTask), for: .touchUpInside)
         
-        //addTodo()
+        setTodo()
     }
+    
+    
     
     override func loadView() {
         view = taskView
@@ -63,7 +71,7 @@ class TaskVC: UIViewController, UITextFieldDelegate{
                 indexPaths.append(indexPath)
             }
             print(Data.taskModels)
-            TaskFunctions.deleteTasks(index: (self?.taskNumber)!)
+            TaskFunctions.deleteTasks(index: (self?.taskIndex)!)
             print(Data.taskModels.count)
             
 //            self?.homeView.taskCollectionView.deleteItems(at: indexPaths)
@@ -84,37 +92,39 @@ class TaskVC: UIViewController, UITextFieldDelegate{
             present(home, animated: true)
         }
     }
-    
-    func addTodo() {
-        taskView.selectorClosure = {
+    func setTodo() {
+       taskView.selectorClosure = {
             self.view.endEditing(true)
             print("Selector called")
+        
+        guard let name =  self.taskView.textField.text else { return }
+        //let date = self.taskView.datePicker.date
+        if name != ""{
+            let todoModel = TodoModel(title: name, date: "Today", notes: "", isChecked: false)
             
-            if (self.taskView.textField).hasValue {
-                //                self.dataSource.sectionItems.append(TodoModel(isExpanded: true, todoItem: Todo(todoName: itemName, todoDate: date, isChecked: false), notes: ""))
-                self.taskView.taskTableView.reloadData()
-                self.taskView.textField.text = ""
-            }
+            TodoFunctions.createTodos(at: self.taskIndex, todoModel: todoModel)
+            self.expandState.append(true)
+            self.taskView.textField.text = ""
+            print(todoModel)
+            self.taskView.taskTableView.reloadData()
         }
+        
+    }
+        
         self.taskView.setTodo()
     }
     
     @objc func expandSection(_ button: UIButton){
         let section = button.tag
-        var indexPaths = [IndexPath]()
-        
-        for row in 0..<1{
-            let indexPath = IndexPath(row: row, section: section)
-            indexPaths.append(indexPath)
-        }
-        
+        let indexPaths = IndexPath(row: 0, section: section)
+
         let isExpanded = expandState[section]
         expandState[section] = !isExpanded
         
         if isExpanded{
-            taskView.taskTableView.insertRows(at: indexPaths, with: .fade)
+            taskView.taskTableView.insertRows(at: [indexPaths], with: .fade)
         } else{
-            taskView.taskTableView.deleteRows(at: indexPaths, with: .fade)
+            taskView.taskTableView.deleteRows(at: [indexPaths], with: .fade)
         }
     }
 }

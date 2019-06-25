@@ -15,6 +15,7 @@ extension UITextField {
         
         self.backgroundColor = UIColor(red: 255/255, green: 160/255, blue: 160/255, alpha: 1)
         self.placeholder = "Invalid entry"
+
         return false
     }
 }
