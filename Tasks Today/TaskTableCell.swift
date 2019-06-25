@@ -29,8 +29,10 @@ class TaskTableCell: UITableViewCell {
         
         var saveButton: UIButton = {
             let button = UIButton()
-            button.backgroundColor = .blue
-            button.titleLabel?.text = "Save"
+            button.backgroundColor = .lightGray
+            button.setTitle("Done", for: .normal)
+            button.setTitleColor(.white, for: .normal)
+            button.titleLabel?.font = Theme.mainFontName?.withSize(14)
             button.layer.cornerRadius = 5.0
             button.layer.masksToBounds = true
             button.translatesAutoresizingMaskIntoConstraints = false
@@ -52,9 +54,12 @@ class TaskTableCell: UITableViewCell {
         override func layoutSubviews() {
             super.layoutSubviews()
             
-            contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0))
+            contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 15, left: 0, bottom: 5, right: 0))
         }
-        
+    
+        func setup(model: TodoModel) {
+            notesView.text = model.notes
+        }
         func notesLabelConstraints(){
             contentView.addSubview(notesLabel)
             notesLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20).isActive = true
@@ -72,7 +77,7 @@ class TaskTableCell: UITableViewCell {
         func saveButtonConstraints(){
             contentView.addSubview(saveButton)
             saveButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-            saveButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+            saveButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
             saveButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
             saveButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         }

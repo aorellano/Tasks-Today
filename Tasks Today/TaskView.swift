@@ -21,7 +21,8 @@ class TaskView: UIView {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.layer.cornerRadius = 10.0
         tableView.clipsToBounds = true
-        tableView.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
+       
+        //tableView.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -29,6 +30,8 @@ class TaskView: UIView {
     var deleteButton: UIButton = {
         let button = UIButton()
         button.setTitle("Delete", for: .normal)
+        button.titleLabel?.font = (Theme.mainFontName?.withSize(12))
+        button.layer.cornerRadius = 5
         button.backgroundColor = .red
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -60,13 +63,13 @@ class TaskView: UIView {
     func taskNameConstraints() {
         self.addSubview(taskName)
         taskName.text = "T a s k"
-        taskName.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 20).isActive = true
+        taskName.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 25).isActive = true
         taskName.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
     }
     
     func taskTableViewConstraints(){
         self.addSubview(taskTableView)
-        taskTableView.topAnchor.constraint(equalTo: taskName.bottomAnchor, constant: 20).isActive = true
+        taskTableView.topAnchor.constraint(equalTo: taskName.bottomAnchor, constant: 25).isActive = true
         taskTableView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
         taskTableView.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: -10).isActive = true
         taskTableView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
@@ -75,8 +78,11 @@ class TaskView: UIView {
     func deleteButtonConstraints() {
         self.addSubview(deleteButton)
         
+        deleteButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        deleteButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        
         deleteButton.centerYAnchor.constraint(equalTo: taskName.centerYAnchor).isActive = true
-        deleteButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
+        deleteButton.trailingAnchor.constraint(equalTo: textField.trailingAnchor).isActive = true
     }
     
     func firstInputView() -> UIToolbar {

@@ -9,6 +9,7 @@
 import Foundation
 
 class TaskFunctions {
+    
     static func createTask(taskModel: TaskModel){
         Data.taskModels.append(taskModel)
     }
@@ -17,13 +18,22 @@ class TaskFunctions {
         //Gets loaded on the background thread so it doesnt slow the UICode down
         DispatchQueue.global(qos: .userInteractive).async {
             if Data.taskModels.count == 0 {
-                Data.taskModels.append(TaskModel(title: "Project", itemNumbers: 5))
-                Data.taskModels.append(TaskModel(title: "School", itemNumbers: 0))
-                Data.taskModels.append(TaskModel(title: "Blog", itemNumbers: 2))
+                Data.taskModels = MockData.createMockTaskData()
             }
             DispatchQueue.main.async {
                 //Once that code gets retrieved the completion function gets called
                 completion()
+            }
+        }
+    }
+    
+    static func readTask(by id: UUID, completion: @escaping(TaskModel?) -> ()) {
+        DispatchQueue.global(qos: .userInteractive).async {
+            let task = Data.taskModels.first(where: { $0.id == id })
+            
+            DispatchQueue.main.async {
+                //Once that code gets retrieved the completion function gets called
+                completion(task)
             }
         }
     }

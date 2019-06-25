@@ -9,18 +9,31 @@
 import Foundation
 import UIKit
 
-class TaskVC: UIViewController, UITextFieldDelegate, UITableViewDelegate{
+class TaskVC: UIViewController, UITextFieldDelegate{
     let taskView = TaskView()
     let homeView = HomeView()
-    let dataSource = TaskDataSource()
+    var taskId: UUID!
+    var taskNumber: Int!
+    var taskModel: TaskModel?
+    var text: String!
+    var expandState = MockData.createExpandedData()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        TaskFunctions.readTask(by: taskId) { [weak self] (model) in
+            guard let self = self else { return }
+            self.taskModel = model
+            guard let model = model else { return }
+            
+            self.taskView.taskName.text = model.title
+            self.taskView.taskTableView.reloadData()
+        }
+        
         view.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
         
         taskView.textField.delegate = self
-        taskView.taskTableView.dataSource = dataSource
+        taskView.taskTableView.dataSource = self
         taskView.taskTableView.delegate = self
         
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
@@ -29,7 +42,7 @@ class TaskVC: UIViewController, UITextFieldDelegate, UITableViewDelegate{
         view.addGestureRecognizer(edgePan)
         taskView.deleteButton.addTarget(self, action: #selector(deleteTask), for: .touchUpInside)
         
-        addTodo()
+        //addTodo()
     }
     
     override func loadView() {
@@ -50,19 +63,15 @@ class TaskVC: UIViewController, UITextFieldDelegate, UITableViewDelegate{
                 indexPaths.append(indexPath)
             }
             print(Data.taskModels)
-            TaskFunctions.deleteTasks(index: 0)
-            print(Data.taskModels)
+            TaskFunctions.deleteTasks(index: (self?.taskNumber)!)
+            print(Data.taskModels.count)
             
 //            self?.homeView.taskCollectionView.deleteItems(at: indexPaths)
-//            
-//            
            // self?.homeView.taskCollectionView.reloadData()
             let home = HomeVC()
             self?.present(home, animated: true)
         }
         let cancel = UIAlertAction(title: "Canel", style: .cancel)
-        
-        
         
         ac.addAction(cancel)
         ac.addAction(delete)
@@ -80,23 +89,86 @@ class TaskVC: UIViewController, UITextFieldDelegate, UITableViewDelegate{
         taskView.selectorClosure = {
             self.view.endEditing(true)
             print("Selector called")
-            let itemName = self.taskView.textField.text ?? "Blank"
-            let date = self.taskView.datePicker.date as NSDate
-            if itemName != "" {
-                self.dataSource.sectionItems.append(ExpandableItems(isExpanded: true, todoItem: Todo(todoName: itemName, todoDate: date, isChecked: false), notes: ""))
+            
+            if (self.taskView.textField).hasValue {
+                //                self.dataSource.sectionItems.append(TodoModel(isExpanded: true, todoItem: Todo(todoName: itemName, todoDate: date, isChecked: false), notes: ""))
+                self.taskView.taskTableView.reloadData()
+                self.taskView.textField.text = ""
             }
-            self.taskView.taskTableView.reloadData()
-            self.taskView.textField.text = ""
         }
         self.taskView.setTodo()
     }
     
+    @objc func expandSection(_ button: UIButton){
+        let section = button.tag
+        var indexPaths = [IndexPath]()
+        
+        for row in 0..<1{
+            let indexPath = IndexPath(row: row, section: section)
+            indexPaths.append(indexPath)
+        }
+        
+        let isExpanded = expandState[section]
+        expandState[section] = !isExpanded
+        
+        if isExpanded{
+            taskView.taskTableView.insertRows(at: indexPaths, with: .fade)
+        } else{
+            taskView.taskTableView.deleteRows(at: indexPaths, with: .fade)
+        }
+    }
+}
+
+extension TaskVC: UITableViewDataSource, UITableViewDelegate, UITextViewDelegate {
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        if let todoModels = taskModel?.todoModels.count {
+            print(todoModels)
+            return todoModels
+        } else { return 0 }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if expandState[section] {
+            return 0
+        }
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = taskView.taskTableView.dequeueReusableCell(withIdentifier: taskView.cellId, for: indexPath) as! TaskTableCell
+        
+        cell.notesView.delegate = self
+        cell.saveButton.addTarget(self, action: #selector(addingNotes), for: .touchUpInside)
+        
+        let model = taskModel?.todoModels[indexPath.section]
+        cell.setup(model: model!)
+        
+        return cell
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        print("First")
+        print(textView.text!)
+        text = textView.text!
+    }
+    
+    @objc func addingNotes(_ button: UIButton){
+        print("Attempting to add notes")
+        
+        let section = button.tag
+        print(text ?? "nil")
+        //        sectionItems[section].notes = "\(text ?? "")"
+    }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let taskHeader = taskView.taskTableView.dequeueReusableHeaderFooterView(withIdentifier: taskView.headerId) as! TaskHeader
-        let headerData = dataSource.sectionItems[section].todoItem
-        taskHeader.headerData = headerData
+        let todoModel = taskModel?.todoModels[section]
+        
+        taskHeader.setup(model: todoModel!)
         taskHeader.expandButton.tag = section
         taskHeader.expandButton.addTarget(self, action: #selector(expandSection), for: .touchUpInside)
+
         return taskHeader
     }
     
@@ -106,29 +178,6 @@ class TaskVC: UIViewController, UITextFieldDelegate, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 85
-    }
-    
-    @objc func expandSection(_ button: UIButton){
-        print("Section Header Pressed")
-        let section = button.tag
-        var indexPaths = [IndexPath]()
-        
-        for row in 0..<1{
-            print(row)
-            let indexPath = IndexPath(row: row, section: section)
-            indexPaths.append(indexPath)
-        }
-        
-        let isExpanded = dataSource.sectionItems[section].isExpanded
-        dataSource.sectionItems[section].isExpanded = !isExpanded
-        print(isExpanded)
-        
-        if isExpanded{
-            taskView.taskTableView.insertRows(at: indexPaths, with: .fade)
-        } else{
-            taskView.taskTableView.deleteRows(at: indexPaths, with: .fade)
-        }
-        
     }
 }
 

@@ -11,6 +11,4 @@ import UIKit
 
 struct ExpandableItems {
     var isExpanded: Bool
-    var todoItem: Todo
-    var notes: String
 }

@@ -12,12 +12,6 @@ import UIKit
 //Dont forget to add extensions 
 
 class TaskHeader: UITableViewHeaderFooterView {
-    var headerData: Todo! {
-        didSet{
-            itemLabel.text = headerData.todoName
-            itemDate.text = dateFormatter.string(from: headerData.todoDate as Date)
-        }
-    }
     var expandButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .clear
@@ -34,7 +28,7 @@ class TaskHeader: UITableViewHeaderFooterView {
         return box
     }()
     
-    var itemLabel: UILabel = {
+    var titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.text = "Create a wireframe"
@@ -43,7 +37,7 @@ class TaskHeader: UITableViewHeaderFooterView {
         return label
     }()
     
-    var itemDate: UILabel = {
+    var dateLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.text = "12:00"
@@ -69,6 +63,17 @@ class TaskHeader: UITableViewHeaderFooterView {
         expandButtonConstraints()
     }
     
+    func setup(model: TodoModel) {
+        titleLabel.text = model.title
+        dateLabel.text = model.date
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top:0, left: 0, bottom: -10, right: 0))
+    }
+    
     func contentViewLayout(){
         contentView.backgroundColor = .white
         contentView.layer.cornerRadius = 10
@@ -87,15 +92,15 @@ class TaskHeader: UITableViewHeaderFooterView {
     }
     
     func itemLabelConstraints(){
-        contentView.addSubview(itemLabel)
-        itemLabel.leadingAnchor.constraint(equalTo: checkBox.trailingAnchor, constant: 10).isActive = true
-        itemLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        contentView.addSubview(titleLabel)
+        titleLabel.leadingAnchor.constraint(equalTo: checkBox.trailingAnchor, constant: 10).isActive = true
+        titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
     }
     
     func itemDateConstraints(){
-        contentView.addSubview(itemDate)
-        itemDate.leadingAnchor.constraint(equalTo: itemLabel.leadingAnchor).isActive = true
-        itemDate.topAnchor.constraint(equalTo: itemLabel.bottomAnchor).isActive = true
+        contentView.addSubview(dateLabel)
+        dateLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor).isActive = true
+        dateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
     }
     
     func expandButtonConstraints(){

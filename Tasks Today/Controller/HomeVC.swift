@@ -12,7 +12,6 @@ import UIKit
 class HomeVC: UIViewController, UITextFieldDelegate{
 
     let homeView = HomeView()
-    //let dataSource = HomeDataSource()
     let collectioCell = TaskCollectionCell()
 
     override func viewDidLoad() {
@@ -28,32 +27,22 @@ class HomeVC: UIViewController, UITextFieldDelegate{
         homeView.taskCollectionView.dataSource = self
         homeView.todayTableView.dataSource = self
         homeView.taskCollectionView.delegate = self
-
-        
     }
     
     override func loadView() {
         view = homeView
     }
 
-    
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
         textField.backgroundColor = .white
         textField.placeholder = "Enter Task"
-        guard let task = textField.text else { return false }
-        if task != "" {
-            TaskFunctions.createTask(taskModel: TaskModel(title: task, itemNumbers: 0))
-//            Data.taskModels.append(TaskModel(title: task, itemNumbers: 0))
-//            print(Data.taskModels)
+
+        if textField.hasValue {
+            TaskFunctions.createTask(taskModel: TaskModel(title: textField.text!, itemNumbers: 0))
             homeView.taskCollectionView.reloadData()
             textField.text = ""
-        } else {
-            textField.backgroundColor = UIColor(red: 255/255, green: 160/255, blue: 160/255, alpha: 1)
-            textField.placeholder = "Invalid entry"
         }
-        
         return false
     }
 }
@@ -70,15 +59,15 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = homeView.taskCollectionView.dequeueReusableCell(withReuseIdentifier: homeView.collectionCellId, for: indexPath) as! TaskCollectionCell
         
-        print(indexPath)
-        
         cell.setup(taskModel: Data.taskModels[indexPath.row])
-        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let taskVC = TaskVC()
+        let task = Data.taskModels[indexPath.row]
+        taskVC.taskId = task.id
+        taskVC.taskNumber = indexPath.row
         print("Going to next viewcontroller")
         self.present(taskVC, animated: true)
     }
