@@ -12,15 +12,17 @@ import UIKit
 struct TodoModel {
     var id: String!
     var title: String
-    var date: String
+    var date = Date()
     var notes: String
     var isChecked: Bool
+    var isExpanded: Bool
     
-    init(title: String, date: String, notes: String, isChecked: Bool){
+    init(title: String, date: Date, notes: String, isChecked: Bool, isExpanded: Bool){
         id = UUID().uuidString
         self.title = title
         self.date = date
         self.notes = notes
         self.isChecked = isChecked
+        self.isExpanded = isExpanded
     }
 }

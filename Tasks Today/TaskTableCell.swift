@@ -11,6 +11,9 @@ import UIKit
 
 class TaskTableCell: UITableViewCell {
     
+    func setup(model: TodoModel) {
+        notesView.text = model.notes
+    }
         var notesLabel: UILabel = {
             let label = UILabel()
             label.textColor = .black
@@ -57,9 +60,7 @@ class TaskTableCell: UITableViewCell {
             contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 15, left: 0, bottom: 5, right: 0))
         }
     
-        func setup(model: TodoModel) {
-            notesView.text = model.notes
-        }
+
         func notesLabelConstraints(){
             contentView.addSubview(notesLabel)
             notesLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20).isActive = true

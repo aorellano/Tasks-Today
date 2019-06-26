@@ -12,7 +12,7 @@ class TodoFunctions {
     static func createTodos(at taskIndex: Int, todoModel: TodoModel){
         Data.taskModels[taskIndex].todoModels.append(todoModel)
     }
-    
+
     static func readTodos(){
     
     }
@@ -23,6 +23,10 @@ class TodoFunctions {
     
     static func deleteTodos(){
         
+    }
+    
+    static func addNotes(taskIndex: Int, todoIndex: Int, notes: String){
+        Data.taskModels[taskIndex].todoModels[todoIndex].notes = notes
     }
     
 }

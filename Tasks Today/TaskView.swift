@@ -22,7 +22,7 @@ class TaskView: UIView {
         tableView.layer.cornerRadius = 10.0
         tableView.clipsToBounds = true
        
-        //tableView.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
+        tableView.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -42,7 +42,7 @@ class TaskView: UIView {
         
         textField.placeholder = "Enter item"
         textField.inputAccessoryView = firstInputView()
-        datePicker.datePickerMode = .date
+//        datePicker.datePickerMode = .date
         taskTableView.register(TaskTableCell.self, forCellReuseIdentifier: cellId)
         taskTableView.register(TaskHeader.self, forHeaderFooterViewReuseIdentifier: headerId)
         

@@ -12,6 +12,13 @@ import UIKit
 //Dont forget to add extensions 
 
 class TaskHeader: UITableViewHeaderFooterView {
+    
+    func setup(model: TodoModel) {
+        titleLabel.text = model.title
+        //dateLabel.text = "\(model.date)"
+        dateLabel.text = dateFormatter.string(from: model.date)
+    }
+    
     var expandButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .clear
@@ -48,7 +55,7 @@ class TaskHeader: UITableViewHeaderFooterView {
     
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "M/dd/yy, h:mm a"
+        formatter.dateFormat = "E, MMM d, h:mm a"
         return formatter
     }()
     
@@ -62,11 +69,7 @@ class TaskHeader: UITableViewHeaderFooterView {
         itemDateConstraints()
         expandButtonConstraints()
     }
-    
-    func setup(model: TodoModel) {
-        titleLabel.text = model.title
-        dateLabel.text = model.date
-    }
+
     
     override func layoutSubviews() {
         super.layoutSubviews()

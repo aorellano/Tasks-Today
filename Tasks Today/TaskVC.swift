@@ -11,25 +11,10 @@ import UIKit
 
 class TaskVC: UIViewController, UITextFieldDelegate{
     let taskView = TaskView()
-    let homeView = HomeView()
     var taskId: UUID!
     var taskIndex: Int!
     var taskModel: TaskModel?
     var text: String!
-    var expandState = MockData.createExpandedData()
-    var ctr = 0
-    
-    fileprivate func updatesTableViewWithData() {
-
-        TaskFunctions.readTask(by: taskId) { [weak self] (model) in
-            guard let self = self else { return }
-            self.taskModel = model
-            guard let model = model else { return }
-            
-            self.taskView.taskName.text = model.title
-            self.taskView.taskTableView.reloadData()
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,10 +36,19 @@ class TaskVC: UIViewController, UITextFieldDelegate{
         setTodo()
     }
     
-    
-    
     override func loadView() {
         view = taskView
+    }
+    
+    fileprivate func updatesTableViewWithData() {
+        TaskFunctions.readTask(by: taskId) { [weak self] (model) in
+            guard let self = self else { return }
+            self.taskModel = model
+            guard let model = model else { return }
+            
+            self.taskView.taskName.text = model.title
+            self.taskView.taskTableView.reloadData()
+        }
     }
     
     @objc func deleteTask(){
@@ -92,36 +86,34 @@ class TaskVC: UIViewController, UITextFieldDelegate{
             present(home, animated: true)
         }
     }
+    
     func setTodo() {
        taskView.selectorClosure = {
             self.view.endEditing(true)
             print("Selector called")
         
         guard let name =  self.taskView.textField.text else { return }
-        //let date = self.taskView.datePicker.date
+        let date = self.taskView.datePicker.date
         if name != ""{
-            let todoModel = TodoModel(title: name, date: "Today", notes: "", isChecked: false)
+            let todoModel = TodoModel(title: name, date: date, notes: "", isChecked: false, isExpanded: true)
             
             TodoFunctions.createTodos(at: self.taskIndex, todoModel: todoModel)
-            self.expandState.append(true)
             self.taskView.textField.text = ""
             print(todoModel)
             self.taskView.taskTableView.reloadData()
         }
-        
     }
-        
         self.taskView.setTodo()
     }
-    
+
     @objc func expandSection(_ button: UIButton){
         let section = button.tag
         let indexPaths = IndexPath(row: 0, section: section)
 
-        let isExpanded = expandState[section]
-        expandState[section] = !isExpanded
+        let isExpanded = taskModel?.todoModels[section].isExpanded
+        taskModel?.todoModels[section].isExpanded = (!isExpanded!)
         
-        if isExpanded{
+        if isExpanded!{
             taskView.taskTableView.insertRows(at: [indexPaths], with: .fade)
         } else{
             taskView.taskTableView.deleteRows(at: [indexPaths], with: .fade)
@@ -139,7 +131,8 @@ extension TaskVC: UITableViewDataSource, UITableViewDelegate, UITextViewDelegate
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if expandState[section] {
+        //Bug that there is default 4 expandable items
+        if (taskModel?.todoModels[section].isExpanded)! {
             return 0
         }
         return 1
@@ -150,6 +143,7 @@ extension TaskVC: UITableViewDataSource, UITableViewDelegate, UITextViewDelegate
         
         cell.notesView.delegate = self
         cell.saveButton.addTarget(self, action: #selector(addingNotes), for: .touchUpInside)
+        cell.saveButton.tag = indexPath.section
         
         let model = taskModel?.todoModels[indexPath.section]
         cell.setup(model: model!)
@@ -158,17 +152,12 @@ extension TaskVC: UITableViewDataSource, UITableViewDelegate, UITextViewDelegate
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        print("First")
-        print(textView.text!)
         text = textView.text!
     }
     
     @objc func addingNotes(_ button: UIButton){
-        print("Attempting to add notes")
-        
         let section = button.tag
-        print(text ?? "nil")
-        //        sectionItems[section].notes = "\(text ?? "")"
+        TodoFunctions.addNotes(taskIndex: taskIndex, todoIndex: section, notes: text)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

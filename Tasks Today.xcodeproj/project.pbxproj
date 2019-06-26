@@ -15,6 +15,7 @@
 		D0B2734722C179FB00C9926E /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B2734622C179FB00C9926E /* MockData.swift */; };
 		D0B2734A22C1CAC600C9926E /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B2734922C1CAC600C9926E /* UITextFieldExtension.swift */; };
 		D0B2734C22C2957800C9926E /* TodoFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B2734B22C2957800C9926E /* TodoFunctions.swift */; };
+		D0B2734E22C2BC2800C9926E /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B2734D22C2BC2800C9926E /* DateExtension.swift */; };
 		D0DFD65D22AC5E8F009A6628 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DFD65C22AC5E8F009A6628 /* AppDelegate.swift */; };
 		D0DFD65F22AC5E8F009A6628 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DFD65E22AC5E8F009A6628 /* HomeVC.swift */; };
 		D0DFD66422AC5E94009A6628 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0DFD66322AC5E94009A6628 /* Assets.xcassets */; };
@@ -27,7 +28,6 @@
 		D0DFD69122B1A073009A6628 /* TaskCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DFD69022B1A073009A6628 /* TaskCollectionCell.swift */; };
 		D0DFD69322B1A0C5009A6628 /* TaskTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DFD69222B1A0C5009A6628 /* TaskTableCell.swift */; };
 		D0DFD69B22B1C2AD009A6628 /* TaskHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DFD69A22B1C2AD009A6628 /* TaskHeader.swift */; };
-		D0DFD6A722BC43BF009A6628 /* ExpandableItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DFD6A622BC43BF009A6628 /* ExpandableItems.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +39,7 @@
 		D0B2734622C179FB00C9926E /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		D0B2734922C1CAC600C9926E /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
 		D0B2734B22C2957800C9926E /* TodoFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoFunctions.swift; sourceTree = "<group>"; };
+		D0B2734D22C2BC2800C9926E /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		D0DFD65922AC5E8F009A6628 /* Tasks Today.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tasks Today.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0DFD65C22AC5E8F009A6628 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0DFD65E22AC5E8F009A6628 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
@@ -53,7 +54,6 @@
 		D0DFD69022B1A073009A6628 /* TaskCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCollectionCell.swift; sourceTree = "<group>"; };
 		D0DFD69222B1A0C5009A6628 /* TaskTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableCell.swift; sourceTree = "<group>"; };
 		D0DFD69A22B1C2AD009A6628 /* TaskHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskHeader.swift; sourceTree = "<group>"; };
-		D0DFD6A622BC43BF009A6628 /* ExpandableItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableItems.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,7 +88,6 @@
 			isa = PBXGroup;
 			children = (
 				D0B2734222C1780D00C9926E /* TodoModel.swift */,
-				D0DFD6A622BC43BF009A6628 /* ExpandableItems.swift */,
 				D0B2734B22C2957800C9926E /* TodoFunctions.swift */,
 			);
 			name = Todo;
@@ -98,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				D0B2734922C1CAC600C9926E /* UITextFieldExtension.swift */,
+				D0B2734D22C2BC2800C9926E /* DateExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -251,6 +251,7 @@
 				D0DFD69B22B1C2AD009A6628 /* TaskHeader.swift in Sources */,
 				D0DFD67F22AF8B6A009A6628 /* CustomLabel.swift in Sources */,
 				D0DFD69122B1A073009A6628 /* TaskCollectionCell.swift in Sources */,
+				D0B2734E22C2BC2800C9926E /* DateExtension.swift in Sources */,
 				D0DFD69322B1A0C5009A6628 /* TaskTableCell.swift in Sources */,
 				D0DFD68522B0873F009A6628 /* TaskVC.swift in Sources */,
 				D0DFD68822B18983009A6628 /* CustomTextField.swift in Sources */,
@@ -260,7 +261,6 @@
 				D0DFD65D22AC5E8F009A6628 /* AppDelegate.swift in Sources */,
 				D0B2733A22BF286E00C9926E /* TaskFunctions.swift in Sources */,
 				D0B2734C22C2957800C9926E /* TodoFunctions.swift in Sources */,
-				D0DFD6A722BC43BF009A6628 /* ExpandableItems.swift in Sources */,
 				D0DFD67122AD9DCC009A6628 /* HomeView.swift in Sources */,
 				D0B2733C22BF295600C9926E /* Data.swift in Sources */,
 				D0B2733722BF274000C9926E /* TaskModel.swift in Sources */,

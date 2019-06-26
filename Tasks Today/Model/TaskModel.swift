@@ -13,7 +13,14 @@ class TaskModel {
     let id: UUID
     var title: String
     var itemNumbers: Int
-    var todoModels = [TodoModel]()
+    var todoModels = [TodoModel]() {
+        didSet {
+            todoModels = todoModels.sorted(by: {$0.date < $1.date})
+//            todoModels = todoModels.sorted(by: { (todoModel1, todoModel2) -> Bool in
+//                todoModel1.date < todoModel2.date
+//            })
+        }
+    }
     
     init(title: String, itemNumbers: Int, todoModels: [TodoModel]? = nil){
         id = UUID()

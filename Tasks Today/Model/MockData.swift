@@ -20,16 +20,10 @@ class MockData {
     
     static func createMockTodoData() -> [TodoModel] {
         var mockTodos = [TodoModel]()
-        mockTodos.append(TodoModel(title: "Create wireframe for app", date: "Today", notes: "", isChecked: false))
-        mockTodos.append(TodoModel(title: "Choose font", date: "Today", notes: "", isChecked: false))
-        mockTodos.append(TodoModel(title: "Choose color scheme", date: "Tommorrow", notes: "", isChecked: false))
-        mockTodos.append(TodoModel(title: "Add additional features", date: "Saturday", notes: "", isChecked: false))
+        mockTodos.append(TodoModel(title: "Create wireframe for app", date: Date(), notes: "", isChecked: false, isExpanded: true))
+        mockTodos.append(TodoModel(title: "Choose font", date: Date().add(days: 1), notes: "", isChecked: false, isExpanded: true))
+        mockTodos.append(TodoModel(title: "Choose color scheme", date: Date().add(days: 2), notes: "", isChecked: false, isExpanded: true))
+        mockTodos.append(TodoModel(title: "Add additional features", date: Date().add(days: 3), notes: "", isChecked: false, isExpanded: true))
         return mockTodos
-    }
-    
-    static func createExpandedData() -> [Bool] {
-        let size = createMockTodoData().count
-        var expandedItems = [Bool](repeating: true, count: size)
-        return expandedItems
     }
 }
