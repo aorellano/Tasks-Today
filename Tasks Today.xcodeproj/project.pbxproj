@@ -16,6 +16,7 @@
 		D0B2734A22C1CAC600C9926E /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B2734922C1CAC600C9926E /* UITextFieldExtension.swift */; };
 		D0B2734C22C2957800C9926E /* TodoFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B2734B22C2957800C9926E /* TodoFunctions.swift */; };
 		D0B2734E22C2BC2800C9926E /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B2734D22C2BC2800C9926E /* DateExtension.swift */; };
+		D0B2735022C475D300C9926E /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B2734F22C475D300C9926E /* UIButtonExtension.swift */; };
 		D0DFD65D22AC5E8F009A6628 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DFD65C22AC5E8F009A6628 /* AppDelegate.swift */; };
 		D0DFD65F22AC5E8F009A6628 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0DFD65E22AC5E8F009A6628 /* HomeVC.swift */; };
 		D0DFD66422AC5E94009A6628 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0DFD66322AC5E94009A6628 /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 		D0B2734922C1CAC600C9926E /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
 		D0B2734B22C2957800C9926E /* TodoFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoFunctions.swift; sourceTree = "<group>"; };
 		D0B2734D22C2BC2800C9926E /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		D0B2734F22C475D300C9926E /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		D0DFD65922AC5E8F009A6628 /* Tasks Today.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tasks Today.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0DFD65C22AC5E8F009A6628 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0DFD65E22AC5E8F009A6628 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 			children = (
 				D0B2734922C1CAC600C9926E /* UITextFieldExtension.swift */,
 				D0B2734D22C2BC2800C9926E /* DateExtension.swift */,
+				D0B2734F22C475D300C9926E /* UIButtonExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0DFD65F22AC5E8F009A6628 /* HomeVC.swift in Sources */,
+				D0B2735022C475D300C9926E /* UIButtonExtension.swift in Sources */,
 				D0B2734A22C1CAC600C9926E /* UITextFieldExtension.swift in Sources */,
 				D0DFD69B22B1C2AD009A6628 /* TaskHeader.swift in Sources */,
 				D0DFD67F22AF8B6A009A6628 /* CustomLabel.swift in Sources */,

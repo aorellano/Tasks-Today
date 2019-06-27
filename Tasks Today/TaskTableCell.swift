@@ -33,12 +33,13 @@ class TaskTableCell: UITableViewCell {
         var saveButton: UIButton = {
             let button = UIButton()
             button.backgroundColor = .lightGray
-            button.setTitle("Done", for: .normal)
+            button.setTitle("Save", for: .normal)
             button.setTitleColor(.white, for: .normal)
             button.titleLabel?.font = Theme.mainFontName?.withSize(14)
             button.layer.cornerRadius = 5.0
             button.layer.masksToBounds = true
             button.translatesAutoresizingMaskIntoConstraints = false
+            button.isHidden = true
             return button
         }()
         

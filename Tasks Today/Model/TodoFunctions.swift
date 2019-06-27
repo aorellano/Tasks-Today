@@ -29,4 +29,8 @@ class TodoFunctions {
         Data.taskModels[taskIndex].todoModels[todoIndex].notes = notes
     }
     
+    static func createTodayTodos() -> Int {
+        return Data.taskModels.count
+    }
+    
 }

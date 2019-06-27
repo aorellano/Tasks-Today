@@ -16,9 +16,6 @@ class TaskModel {
     var todoModels = [TodoModel]() {
         didSet {
             todoModels = todoModels.sorted(by: {$0.date < $1.date})
-//            todoModels = todoModels.sorted(by: { (todoModel1, todoModel2) -> Bool in
-//                todoModel1.date < todoModel2.date
-//            })
         }
     }
     

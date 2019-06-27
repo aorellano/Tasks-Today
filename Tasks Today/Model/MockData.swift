@@ -26,4 +26,5 @@ class MockData {
         mockTodos.append(TodoModel(title: "Add additional features", date: Date().add(days: 3), notes: "", isChecked: false, isExpanded: true))
         return mockTodos
     }
+
 }

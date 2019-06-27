@@ -13,7 +13,7 @@ class TaskCollectionCell: UICollectionViewCell {
     
     func setup(taskModel: TaskModel){
         taskName.text = taskModel.title
-        numberLabel.text = "\(taskModel.itemNumbers)"
+        numberLabel.text = "\(taskModel.todoModels.count)"
     }
 
     var taskName: UILabel = {

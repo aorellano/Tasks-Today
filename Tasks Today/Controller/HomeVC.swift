@@ -9,10 +9,13 @@
 import UIKit
 //Simple Theme
 //main font, background color, accent color, tint color
+//Change edit button to say edit then done when person starts typing
+//also change the color
 class HomeVC: UIViewController, UITextFieldDelegate{
 
     let homeView = HomeView()
     let collectioCell = TaskCollectionCell()
+    let todayTodos = [TodoModel]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +49,6 @@ class HomeVC: UIViewController, UITextFieldDelegate{
         return false
     }
 }
-
 extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -62,7 +64,6 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate {
         cell.setup(taskModel: Data.taskModels[indexPath.row])
         return cell
     }
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let taskVC = TaskVC()
         let task = Data.taskModels[indexPath.row]
@@ -72,8 +73,10 @@ extension HomeVC: UICollectionViewDataSource, UICollectionViewDelegate {
         self.present(taskVC, animated: true)
     }
 }
-
 extension HomeVC: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
     }

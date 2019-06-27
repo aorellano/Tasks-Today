@@ -15,6 +15,8 @@ class TaskVC: UIViewController, UITextFieldDelegate{
     var taskIndex: Int!
     var taskModel: TaskModel?
     var text: String!
+    var closure: (() -> ())?
+    var saveButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,13 +110,14 @@ class TaskVC: UIViewController, UITextFieldDelegate{
 
     @objc func expandSection(_ button: UIButton){
         let section = button.tag
+        
         let indexPaths = IndexPath(row: 0, section: section)
 
         let isExpanded = taskModel?.todoModels[section].isExpanded
         taskModel?.todoModels[section].isExpanded = (!isExpanded!)
-        
         if isExpanded!{
             taskView.taskTableView.insertRows(at: [indexPaths], with: .fade)
+            saveButton.isHidden = true
         } else{
             taskView.taskTableView.deleteRows(at: [indexPaths], with: .fade)
         }
@@ -125,7 +128,6 @@ extension TaskVC: UITableViewDataSource, UITableViewDelegate, UITextViewDelegate
 
     func numberOfSections(in tableView: UITableView) -> Int {
         if let todoModels = taskModel?.todoModels.count {
-            print(todoModels)
             return todoModels
         } else { return 0 }
     }
@@ -142,22 +144,35 @@ extension TaskVC: UITableViewDataSource, UITableViewDelegate, UITextViewDelegate
         let cell = taskView.taskTableView.dequeueReusableCell(withIdentifier: taskView.cellId, for: indexPath) as! TaskTableCell
         
         cell.notesView.delegate = self
-        cell.saveButton.addTarget(self, action: #selector(addingNotes), for: .touchUpInside)
+        
+        cell.saveButton.addTarget(self, action: #selector(saveNote), for: .touchUpInside)
         cell.saveButton.tag = indexPath.section
         
         let model = taskModel?.todoModels[indexPath.section]
         cell.setup(model: model!)
         
+        saveButton = cell.saveButton
         return cell
     }
     
     func textViewDidChange(_ textView: UITextView) {
         text = textView.text!
+        saveButton.editingLayout()
     }
     
-    @objc func addingNotes(_ button: UIButton){
+    
+    @objc func saveNote(_ button: UIButton){
         let section = button.tag
+        button.pulse()
+        button.savedLayout()
         TodoFunctions.addNotes(taskIndex: taskIndex, todoIndex: section, notes: text)
+    }
+    
+    func buttonAction(_ button : UIButton){
+        print("Next")
+        print(button)
+        
+        //button.translatesAutoresizingMaskIntoConstraints = true
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
