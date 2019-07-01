@@ -19,6 +19,9 @@ class TaskFunctions {
         DispatchQueue.global(qos: .userInteractive).async {
             if Data.taskModels.count == 0 {
                 Data.taskModels = MockData.createMockTaskData()
+                for index in Data.taskModels {
+                    print(index)
+                }
             }
             DispatchQueue.main.async {
                 //Once that code gets retrieved the completion function gets called

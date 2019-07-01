@@ -21,7 +21,7 @@ class TaskVC: UIViewController, UITextFieldDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        updatesTableViewWithData()
+        loadData()
         
         view.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
         
@@ -42,7 +42,7 @@ class TaskVC: UIViewController, UITextFieldDelegate{
         view = taskView
     }
     
-    fileprivate func updatesTableViewWithData() {
+    fileprivate func loadData() {
         TaskFunctions.readTask(by: taskId) { [weak self] (model) in
             guard let self = self else { return }
             self.taskModel = model
@@ -122,6 +122,38 @@ class TaskVC: UIViewController, UITextFieldDelegate{
             taskView.taskTableView.deleteRows(at: [indexPaths], with: .fade)
         }
     }
+    
+    @objc func itemCompleted(_ button: UIButton){
+        let section = button.tag
+        let todos = taskModel?.todoModels[section]
+
+        button.isSelected = !button.isSelected
+        
+        if let cell = taskView.taskTableView.headerView(forSection: section) as? TaskHeader {
+            UIView.animate(withDuration: 0.8, delay: 0.6, animations: {
+                
+                cell.titleLabel.attributedText = self.strikeThroughText((todos?.title)!)
+                self.taskView.taskTableView.beginUpdates()
+                TodoFunctions.deleteTodos(at: self.taskIndex, in: section)
+                self.taskView.taskTableView.deleteSections([section], with: UITableView.RowAnimation.automatic)
+                
+                self.taskView.taskTableView.endUpdates()
+            }, completion: { (success) in
+                
+                
+                self.taskView.taskTableView.reloadData()
+                
+            })
+            print((todos?.title)!)
+            
+        }
+    }
+    
+    func strikeThroughText(_ text: String) -> NSAttributedString {
+        let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: text)
+        attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 1, range: NSMakeRange(0, attributeString.length))
+        return attributeString
+    }
 }
 
 extension TaskVC: UITableViewDataSource, UITableViewDelegate, UITextViewDelegate {
@@ -176,12 +208,14 @@ extension TaskVC: UITableViewDataSource, UITableViewDelegate, UITextViewDelegate
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let taskHeader = taskView.taskTableView.dequeueReusableHeaderFooterView(withIdentifier: taskView.headerId) as! TaskHeader
+        let taskHeader = taskView.taskTableView.dequeueReusableHeaderFooterView(withIdentifier: TaskView.headerId) as! TaskHeader
         let todoModel = taskModel?.todoModels[section]
         
         taskHeader.setup(model: todoModel!)
         taskHeader.expandButton.tag = section
         taskHeader.expandButton.addTarget(self, action: #selector(expandSection), for: .touchUpInside)
+        taskHeader.checkBox.tag = section
+        taskHeader.checkBox.addTarget(self, action: #selector(itemCompleted), for: .touchUpInside)
 
         return taskHeader
     }

@@ -11,6 +11,7 @@ import UIKit
 class HomeView: UIView {
     let collectionCellId = "Collection Cell"
     let tableViewCellId = "Table Cell"
+    let headerViewId = "sectionheader"
     var taskCollectionView: UICollectionView!
     let flowLayout = UICollectionViewFlowLayout()
     var tasksLabel = CustomLabel()
@@ -21,7 +22,7 @@ class HomeView: UIView {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.layer.cornerRadius = 10.0
         tableView.clipsToBounds = true
-        tableView.backgroundColor = .blue
+        tableView.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -33,6 +34,7 @@ class HomeView: UIView {
         
         taskCollectionView.register(TaskCollectionCell.self, forCellWithReuseIdentifier: collectionCellId)
         todayTableView.register(UITableViewCell.self, forCellReuseIdentifier: tableViewCellId)
+        todayTableView.register(TaskHeader.self, forHeaderFooterViewReuseIdentifier: headerViewId)
         
         
         textFieldConstraints()
@@ -44,8 +46,9 @@ class HomeView: UIView {
     }
     
     func collectionViewLayout() {
-        flowLayout.itemSize = CGSize(width: 150, height: 200)
+        flowLayout.itemSize = CGSize(width: 145, height: 200)
         flowLayout.scrollDirection = .horizontal
+        flowLayout.minimumLineSpacing = 5
         taskCollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         taskCollectionView.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
     }
@@ -71,8 +74,8 @@ class HomeView: UIView {
         taskCollectionView.translatesAutoresizingMaskIntoConstraints = false
         taskCollectionView.heightAnchor.constraint(equalToConstant: 210).isActive = true
         taskCollectionView.topAnchor.constraint(equalTo: tasksLabel.bottomAnchor, constant: 25).isActive = true
-        taskCollectionView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 15).isActive = true
-        taskCollectionView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -15).isActive = true
+        taskCollectionView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+        taskCollectionView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
     }
     
     func todayLabelConstraints(){
@@ -86,8 +89,8 @@ class HomeView: UIView {
     func tableViewConstraints(){
         self.addSubview(todayTableView)
         todayTableView.topAnchor.constraint(equalTo: todayLabel.bottomAnchor, constant: 30).isActive = true
-        todayTableView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 15).isActive = true
-        todayTableView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -15).isActive = true
+        todayTableView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 10).isActive = true
+        todayTableView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
         todayTableView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
 

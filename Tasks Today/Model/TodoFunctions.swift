@@ -21,16 +21,12 @@ class TodoFunctions {
         
     }
     
-    static func deleteTodos(){
-        
+    static func deleteTodos(at taskIndex: Int, in todoIndex: Int){
+         print(todoIndex)
+         Data.taskModels[taskIndex].todoModels.remove(at: todoIndex)
     }
     
     static func addNotes(taskIndex: Int, todoIndex: Int, notes: String){
         Data.taskModels[taskIndex].todoModels[todoIndex].notes = notes
     }
-    
-    static func createTodayTodos() -> Int {
-        return Data.taskModels.count
-    }
-    
 }

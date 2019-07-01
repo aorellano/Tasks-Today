@@ -21,6 +21,8 @@ class MockData {
     static func createMockTodoData() -> [TodoModel] {
         var mockTodos = [TodoModel]()
         mockTodos.append(TodoModel(title: "Create wireframe for app", date: Date(), notes: "", isChecked: false, isExpanded: true))
+        mockTodos.append(TodoModel(title: "Create home screen", date: Date(), notes: "", isChecked: false, isExpanded: true))
+        mockTodos.append(TodoModel(title: "Create theme for app", date: Date(), notes: "", isChecked: false, isExpanded: true))
         mockTodos.append(TodoModel(title: "Choose font", date: Date().add(days: 1), notes: "", isChecked: false, isExpanded: true))
         mockTodos.append(TodoModel(title: "Choose color scheme", date: Date().add(days: 2), notes: "", isChecked: false, isExpanded: true))
         mockTodos.append(TodoModel(title: "Add additional features", date: Date().add(days: 3), notes: "", isChecked: false, isExpanded: true))
