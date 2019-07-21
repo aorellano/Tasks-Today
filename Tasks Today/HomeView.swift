@@ -26,6 +26,14 @@ class HomeView: UIView {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
+    
+    var settingsButton: UIButton = {
+        let image = UIImage(named: "SettingsButton")
+        let button = UIButton()
+        button.setImage(image, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -36,11 +44,10 @@ class HomeView: UIView {
         todayTableView.register(UITableViewCell.self, forCellReuseIdentifier: tableViewCellId)
         todayTableView.register(TaskHeader.self, forHeaderFooterViewReuseIdentifier: headerViewId)
         
-        
+        collectionViewConstraints()
+        settingsButtonConstraints()
         textFieldConstraints()
         tasksLabelConstraints()
-        
-        collectionViewConstraints()
         todayLabelConstraints()
         tableViewConstraints()
     }
@@ -51,6 +58,12 @@ class HomeView: UIView {
         flowLayout.minimumLineSpacing = 5
         taskCollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         taskCollectionView.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
+    }
+    
+    func settingsButtonConstraints(){
+        self.addSubview(settingsButton)
+        settingsButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
+        settingsButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10).isActive = true
     }
     
     func textFieldConstraints() {
