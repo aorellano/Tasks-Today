@@ -37,7 +37,7 @@ class TaskHeader: UITableViewHeaderFooterView {
     
     var titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = Theme.current.fontColor
         label.text = "Create a wireframe"
         label.font = UIFont(name: "Arial", size: 14)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -46,7 +46,7 @@ class TaskHeader: UITableViewHeaderFooterView {
     
     var dateLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
+        label.textColor = Theme.current.fontColor
         label.text = "12:00"
         label.font = UIFont(name: "Arial", size: 10)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -55,7 +55,7 @@ class TaskHeader: UITableViewHeaderFooterView {
     
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "E, MMM d, h:mm a"
+        formatter.dateFormat = "E, MMM d"
         return formatter
     }()
     
@@ -69,7 +69,7 @@ class TaskHeader: UITableViewHeaderFooterView {
         itemDateConstraints()
         expandButtonConstraints()
     }
-
+    
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -78,7 +78,7 @@ class TaskHeader: UITableViewHeaderFooterView {
     }
     
     func contentViewLayout(){
-        contentView.backgroundColor = .white
+        contentView.backgroundColor = Theme.current.accent
         contentView.layer.cornerRadius = 10
         contentView.layer.shadowColor = UIColor.lightGray.cgColor
         contentView.layer.shadowOffset = CGSize(width: 0, height: 1.5)

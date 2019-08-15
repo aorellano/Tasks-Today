@@ -21,8 +21,9 @@ class TaskView: UIView {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.layer.cornerRadius = 10.0
         tableView.clipsToBounds = true
+        tableView.separatorColor = .clear
        
-        tableView.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
+        tableView.backgroundColor = Theme.current.background
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()

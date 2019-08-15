@@ -18,8 +18,8 @@ class CustomLabel: UILabel {
     
     func labelLayout(){
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.font = UIFont(name: "HelveticaNeue-Medium", size: 20)
-        self.textColor = .darkGray
+        self.font = UIFont(name: Theme.current.mainFontName, size: 20)
+        self.textColor = Theme.current.fontColor
     }
     
     required init?(coder aDecoder: NSCoder) {

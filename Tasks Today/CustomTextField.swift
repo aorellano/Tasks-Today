@@ -18,10 +18,11 @@ class CustomTextField: UITextField{
     
     func textFieldLayout(){
         self.borderStyle = .roundedRect
-        self.backgroundColor = .white
+        self.backgroundColor = Theme.current.accent
         self.layer.masksToBounds = false
         self.textAlignment = .center
-        self.placeholder = "Enter Task"
+        self.attributedPlaceholder = NSAttributedString(string: "Enter Task",attributes: [NSAttributedString.Key.foregroundColor: Theme.current.tint])
+        self.textColor = Theme.current.tint
         self.translatesAutoresizingMaskIntoConstraints = false
     }
     

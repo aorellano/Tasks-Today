@@ -29,4 +29,18 @@ class TodoFunctions {
     static func addNotes(taskIndex: Int, todoIndex: Int, notes: String){
         Data.taskModels[taskIndex].todoModels[todoIndex].notes = notes
     }
+    
+    static func deleteTodayTodos(todoModel: TodoModel){
+        for tasks in Data.taskModels.indices {
+            for todos in Data.taskModels[tasks].todoModels.indices {
+                print(Data.taskModels[tasks].todoModels[0])
+                print("Its a match")
+                if Data.taskModels[tasks].todoModels[todos].id == todoModel.id {
+                    deleteTodos(at: tasks, in: todos)
+                    break
+                }
+                //print("\(Data.taskModels[tasks].todoModels[todos]) AND \(todoModel)")
+            }
+        }
+    }
 }

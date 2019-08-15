@@ -16,7 +16,7 @@ class TaskTableCell: UITableViewCell {
     }
         var notesLabel: UILabel = {
             let label = UILabel()
-            label.textColor = .black
+            label.textColor = Theme.current.tint
             label.text = "Notes:"
             label.font = UIFont(name: "Arial", size: 14)
             label.translatesAutoresizingMaskIntoConstraints = false
@@ -25,7 +25,7 @@ class TaskTableCell: UITableViewCell {
         
         var notesView: UITextView = {
             let view = UITextView()
-            view.backgroundColor = .white
+            view.backgroundColor = Theme.current.accent
             view.translatesAutoresizingMaskIntoConstraints = false
             return view
         }()
@@ -46,9 +46,9 @@ class TaskTableCell: UITableViewCell {
         override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
             
-            self.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
+            self.backgroundColor = Theme.current.background
             
-            contentView.backgroundColor = .white
+            contentView.backgroundColor = Theme.current.accent
             contentView.layer.cornerRadius = 10
             
             notesLabelConstraints()
