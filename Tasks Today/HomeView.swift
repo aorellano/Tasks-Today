@@ -22,6 +22,7 @@ class HomeView: UIView {
         let iconImage = UIImage(named: "MoreIcon-2")
         let icon = UIButton()
         icon.setImage(iconImage, for: .normal)
+        icon.addTarget(self, action: #selector(HomeController.settingsButtonsPressed), for: .touchUpInside)
         
         icon.layer.shadowOpacity = 0.75
         //icon.layer.shadowRadius = 2
@@ -53,10 +54,16 @@ class HomeView: UIView {
         return label
     }()
     
-    
-    
+    let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "d"
+        return formatter
+    }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        self.backgroundColor = Theme.current.background
         
         collectionViewLayout()
         

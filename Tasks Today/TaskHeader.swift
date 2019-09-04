@@ -15,7 +15,6 @@ class TaskHeader: UITableViewHeaderFooterView {
     
     func setup(model: TodoModel) {
         titleLabel.text = model.title
-        //dateLabel.text = "\(model.date)"
         dateLabel.text = dateFormatter.string(from: model.date)
     }
     
@@ -31,6 +30,7 @@ class TaskHeader: UITableViewHeaderFooterView {
         let checked = UIImage(named: "Checked")
         box.setImage(unchecked, for: .normal)
         box.setImage(checked, for: .selected)
+        box.addTarget(self, action: #selector(HomeController.itemCompleted), for: .touchUpInside)
         box.translatesAutoresizingMaskIntoConstraints = false
         return box
     }()

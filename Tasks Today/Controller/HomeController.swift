@@ -7,88 +7,59 @@
 //
 
 import UIKit
-//Simple Theme
-//main font, background color, accent color, tint color
-//Change edit button to say edit then done when person starts typing
-//also change the color
+
 class HomeController: UIViewController, UITextFieldDelegate{
     let homeView = HomeView()
-    let collectioCell = TaskCollectionCell()
-    
+    let collectionCell = TaskCollectionCell()
     
     var todayTodos = [TodoModel]() {
         didSet {
             todayTodos = todayTodos.sorted(by: {$0.date < $1.date})
         }
     }
-    let dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "d"
-        return formatter
-    }()
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print("Hi")
+
+        protocolSetups()
         loadData()
-        print(todayTodos.count)
-        
-        view.backgroundColor = Theme.current.background
-        homeView.textField.delegate = self
-        homeView.taskCollectionView.dataSource = self
-        homeView.todayTableView.dataSource = self
-        homeView.taskCollectionView.delegate = self
-        homeView.todayTableView.delegate = self
-        
-        homeView.settingsIcon.addTarget(self, action: #selector(settingsButtonsPressed), for: .touchUpInside)
     }
     
     override func loadView() {
         view = homeView
     }
     
-    @objc func settingsButtonsPressed() {
-        print("Trying to go to the settings page")
-        let settingsVC = SettingsController()
-        
-        present(settingsVC, animated: true)
+    func protocolSetups() {
+        homeView.textField.delegate = self
+        homeView.taskCollectionView.dataSource = self
+        homeView.todayTableView.dataSource = self
+        homeView.taskCollectionView.delegate = self
+        homeView.todayTableView.delegate = self
     }
     
     fileprivate func loadData() {
-        
         TaskFunctions.readTasks(completion: { [weak self] in
             
             for taskIndex in Data.taskModels.indices {
                 for todoIndex in Data.taskModels[taskIndex].todoModels.indices{
-                    if self?.dateFormatter.string(from: Data.taskModels[taskIndex].todoModels[todoIndex].date) == self?.dateFormatter.string(from: Date()) {
-                        
+                    if self?.homeView.dateFormatter.string(from: Data.taskModels[taskIndex].todoModels[todoIndex].date) == self?.homeView.dateFormatter.string(from: Date()) {
                         self?.todayTodos.append(Data.taskModels[taskIndex].todoModels[todoIndex])
                     }
                 }
             }
-            
-            
             self?.homeView.todayTableView.reloadData()
             self?.homeView.taskCollectionView.reloadData()
         })
-        //        if todayTodos.count == 0{
-        //
-        //
-        //        } else {
-        //            homeView.todayTableView.isHidden = false
-        //            homeView.finishedLabel.isHidden = true
-        //        }
     }
     
+    @objc func settingsButtonsPressed() {
+        let settingsVC = SettingsController()
+        present(settingsVC, animated: true)
+    }
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
         textField.placeholder = "Enter Task"
-        
-        
-        
         if textField.text != "" {
             TaskFunctions.createTask(taskModel: TaskModel(title: textField.text!, itemNumbers: 0))
             homeView.taskCollectionView.reloadData()
@@ -125,15 +96,26 @@ class HomeController: UIViewController, UITextFieldDelegate{
         if todayTodos.count == 0 {
             homeView.todayTableView.isHidden = true
         }
-        
     }
+    
     func strikeThroughText(_ text: String) -> NSAttributedString {
         let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: text)
         attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 1, range: NSMakeRange(0, attributeString.length))
         return attributeString
     }
+
 }
 extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return todayTodos.count
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if todayTodos.count != 0 {
+            homeView.todayTableView.isHidden = false
+        }
+        return 0
+    }
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -144,71 +126,38 @@ extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = homeView.taskCollectionView.dequeueReusableCell(withReuseIdentifier: homeView.collectionCellId, for: indexPath) as! TaskCollectionCell
-        
         cell.setup(taskModel: Data.taskModels[indexPath.row])
-        
         return cell
     }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let taskVC = TaskController()
         let task = Data.taskModels[indexPath.row]
         taskVC.taskId = task.id
         taskVC.taskIndex = indexPath.row
-        print("Going to next viewcontroller")
         self.present(taskVC, animated: true)
     }
 }
+
 extension HomeController: UITableViewDataSource, UITableViewDelegate {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return todayTodos.count
-        //        if let todoModels = todayTodos.count {
-        //            return todoModels
-        //        } else { return 0 }
-    }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(todayTodos.count)
-        if todayTodos.count != 0 {
-            homeView.todayTableView.isHidden = false
-        }
-        //return todayTodos.count
-        return 0
-    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = homeView.todayTableView.dequeueReusableCell(withIdentifier: homeView.tableViewCellId, for: indexPath)
-        
         return cell
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let taskHeader = homeView.todayTableView.dequeueReusableHeaderFooterView(withIdentifier: homeView.headerViewId) as! TaskHeader
-        //        homeView.todayTableView.isHidden = true
-        //        homeView.finishedLabel.isHidden = false
-        
+
         let todoModel = todayTodos[section]
-        
-        
-        
-        
         taskHeader.setup(model: todoModel)
-        
         taskHeader.checkBox.tag = section
-        
-        
-        taskHeader.checkBox.addTarget(self, action: #selector(itemCompleted), for: .touchUpInside)
-        
-        
-        
-        
-        
-        
+
         return taskHeader
     }
-    
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 85
     }
-    
 }
 
 

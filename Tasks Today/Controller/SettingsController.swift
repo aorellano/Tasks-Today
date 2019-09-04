@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MessageUI
 
 class SettingsController: UIViewController {
     let settingsView = SettingsView()
@@ -27,18 +28,15 @@ class SettingsController: UIViewController {
 
 extension SettingsController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 2
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if section == 0 {
             return 1
-        } else if section == 1 {
-            return 2
         } else {
-            return 3
+            return 2
         }
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -46,20 +44,10 @@ extension SettingsController: UITableViewDataSource, UITableViewDelegate {
         
         if indexPath.section == 0 {
             cell.title("More Themes!")
-        } else if indexPath.section == 1{
-            if indexPath.row == 0{
-                cell.title("Get in Touch")
-            } else {
-                cell.title("Share the App")
-            }
-        } else if indexPath.section == 2 {
-            if indexPath.row == 0{
-                cell.title("Instagram")
-            } else if indexPath.row == 1 {
-                cell.title("Twitter")
-            } else {
-                cell.title("Medium")
-            }
+        } else if indexPath.section == 1 && indexPath.row == 0{
+            cell.title("Share the App")
+        } else {
+            cell.title("About")
         }
         return cell
     }
@@ -82,6 +70,11 @@ extension SettingsController: UITableViewDataSource, UITableViewDelegate {
         if indexPath.section == 0{
             let themesVC = ThemesController()
             present(themesVC, animated: true)
+        } else if indexPath.section == 1 && indexPath.row == 0 {
+            print("hi")
+        } else {
+            let aboutVC = AboutController()
+            present(aboutVC, animated: true)
         }
     }
     

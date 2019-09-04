@@ -41,7 +41,7 @@ class TaskView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        textField.placeholder = "Enter item"
+        textField.attributedPlaceholder = NSAttributedString(string: "Enter todo",attributes: [NSAttributedString.Key.foregroundColor: Theme.current.tint])
         textField.inputAccessoryView = firstInputView()
 //        datePicker.datePickerMode = .date
         taskTableView.register(TaskTableCell.self, forCellReuseIdentifier: cellId)

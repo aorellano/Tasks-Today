@@ -203,13 +203,12 @@ class TaskController: UIViewController, UITextFieldDelegate{
 }
 
 extension TaskController: UITableViewDataSource, UITableViewDelegate, UITextViewDelegate {
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         if let todoModels = taskModel?.todoModels.count {
             return todoModels
         } else { return 0 }
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //Bug that there is default 4 expandable items
         if (taskModel?.todoModels[section].isExpanded)! {
