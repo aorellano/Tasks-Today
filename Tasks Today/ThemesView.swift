@@ -15,10 +15,8 @@ class ThemesView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = Theme.current.background
-        
         themesLabelConstraints()
         colorTableViewConstraints()
-        
     }
     
     var colorTableView: UITableView = {
@@ -27,14 +25,12 @@ class ThemesView: UIView {
         tableView.clipsToBounds = true
         tableView.backgroundColor = Theme.current.background
         tableView.separatorColor = .clear
-        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
     
     func themesLabelConstraints(){
         addSubview(themesLabel)
-        
         themesLabel.text = "T H E M E S"
         themesLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 40).isActive = true
         themesLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true

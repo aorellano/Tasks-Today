@@ -23,11 +23,9 @@ class HomeView: UIView {
         let icon = UIButton()
         icon.setImage(iconImage, for: .normal)
         icon.addTarget(self, action: #selector(HomeController.settingsButtonsPressed), for: .touchUpInside)
-        
         icon.layer.shadowOpacity = 0.75
         icon.layer.shadowOffset = CGSize(width: 0, height: 4)
         icon.layer.shadowColor = UIColor.darkGray.cgColor
-        
         icon.layer.masksToBounds = false
         icon.translatesAutoresizingMaskIntoConstraints = false
         return icon
@@ -63,14 +61,11 @@ class HomeView: UIView {
         self.backgroundColor = Theme.current.background
         
         collectionViewLayout()
-        
         taskCollectionView.register(TaskCollectionCell.self, forCellWithReuseIdentifier: collectionCellId)
         todayTableView.register(UITableViewCell.self, forCellReuseIdentifier: tableViewCellId)
         todayTableView.register(TaskHeader.self, forHeaderFooterViewReuseIdentifier: headerViewId)
-        
         textFieldConstraints()
         tasksLabelConstraints()
-        
         collectionViewConstraints()
         todayLabelConstraints()
         finishedLabelConstraints()

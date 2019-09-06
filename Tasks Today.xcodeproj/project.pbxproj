@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D0973ED2231F626B001DD4B4 /* AboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0973ED1231F626A001DD4B4 /* AboutController.swift */; };
-		D0973ED4231F62AF001DD4B4 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0973ED3231F62AF001DD4B4 /* AboutView.swift */; };
-		D0ABE7522322ECDC001ADF70 /* NSAttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ABE7512322ECDC001ADF70 /* NSAttributedString.swift */; };
-		D0ABE7542322F42A001ADF70 /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ABE7532322F42A001ADF70 /* UITextFieldExtension.swift */; };
 		D0B2733722BF274000C9926E /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B2733622BF274000C9926E /* TaskModel.swift */; };
 		D0B2733A22BF286E00C9926E /* TaskFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B2733922BF286E00C9926E /* TaskFunctions.swift */; };
 		D0B2733C22BF295600C9926E /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B2733B22BF295600C9926E /* Data.swift */; };
@@ -40,10 +36,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D0973ED1231F626A001DD4B4 /* AboutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutController.swift; sourceTree = "<group>"; };
-		D0973ED3231F62AF001DD4B4 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
-		D0ABE7512322ECDC001ADF70 /* NSAttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSAttributedString.swift; sourceTree = "<group>"; };
-		D0ABE7532322F42A001ADF70 /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
 		D0B2733622BF274000C9926E /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		D0B2733922BF286E00C9926E /* TaskFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskFunctions.swift; sourceTree = "<group>"; };
 		D0B2733B22BF295600C9926E /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
@@ -94,13 +86,6 @@
 			name = Task;
 			sourceTree = "<group>";
 		};
-		D0B2733D22BF3FE800C9926E /*  Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = " Resources";
-			sourceTree = "<group>";
-		};
 		D0B2734522C1785900C9926E /* Todo */ = {
 			isa = PBXGroup;
 			children = (
@@ -115,8 +100,6 @@
 			children = (
 				D0B2734D22C2BC2800C9926E /* DateExtension.swift */,
 				D0B2734F22C475D300C9926E /* UIButtonExtension.swift */,
-				D0ABE7512322ECDC001ADF70 /* NSAttributedString.swift */,
-				D0ABE7532322F42A001ADF70 /* UITextFieldExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -145,7 +128,6 @@
 				D0DFD67D22AED5DD009A6628 /* Controller */,
 				D0DFD67C22AED5D4009A6628 /* View */,
 				D0DFD67B22AED5C5009A6628 /* Model */,
-				D0B2733D22BF3FE800C9926E /*  Resources */,
 				D0DFD67222AD9DD8009A6628 /* Supporting Files */,
 				D0DFD66822AC5E94009A6628 /* Info.plist */,
 			);
@@ -185,7 +167,6 @@
 				D0DFD68722B18983009A6628 /* CustomTextField.swift */,
 				D0EC313F230501E7001716AB /* ThemesView.swift */,
 				D0EC314323050367001716AB /* ColorsTableCell.swift */,
-				D0973ED3231F62AF001DD4B4 /* AboutView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -196,7 +177,6 @@
 				D0DFD65E22AC5E8F009A6628 /* HomeController.swift */,
 				D0EC31372305000B001716AB /* TaskController.swift */,
 				D0EC313B230500F4001716AB /* ThemesController.swift */,
-				D0973ED1231F626A001DD4B4 /* AboutController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -281,15 +261,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0973ED4231F62AF001DD4B4 /* AboutView.swift in Sources */,
 				D0DFD65F22AC5E8F009A6628 /* HomeController.swift in Sources */,
 				D0EC31362304DF5B001716AB /* Colors.swift in Sources */,
 				D0EC314423050367001716AB /* ColorsTableCell.swift in Sources */,
 				D0B2735022C475D300C9926E /* UIButtonExtension.swift in Sources */,
 				D0EC31342304DF20001716AB /* ThemeProtocol.swift in Sources */,
 				D0EC31382305000B001716AB /* TaskController.swift in Sources */,
-				D0ABE7542322F42A001ADF70 /* UITextFieldExtension.swift in Sources */,
-				D0ABE7522322ECDC001ADF70 /* NSAttributedString.swift in Sources */,
 				D0DFD69B22B1C2AD009A6628 /* TaskHeader.swift in Sources */,
 				D0DFD67F22AF8B6A009A6628 /* CustomLabel.swift in Sources */,
 				D0DFD69122B1A073009A6628 /* TaskCollectionCell.swift in Sources */,
@@ -306,7 +283,6 @@
 				D0DFD67122AD9DCC009A6628 /* HomeView.swift in Sources */,
 				D0EC313C230500F4001716AB /* ThemesController.swift in Sources */,
 				D0B2733C22BF295600C9926E /* Data.swift in Sources */,
-				D0973ED2231F626B001DD4B4 /* AboutController.swift in Sources */,
 				D0B2733722BF274000C9926E /* TaskModel.swift in Sources */,
 				D0DFD68A22B18A96009A6628 /* TaskView.swift in Sources */,
 			);

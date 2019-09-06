@@ -22,7 +22,6 @@ class TaskView: UIView {
         tableView.layer.cornerRadius = 10.0
         tableView.clipsToBounds = true
         tableView.separatorColor = .clear
-       
         tableView.backgroundColor = Theme.current.background
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
@@ -46,7 +45,6 @@ class TaskView: UIView {
         
         textField.attributedPlaceholder = NSAttributedString(string: "Enter todo",attributes: [NSAttributedString.Key.foregroundColor: Theme.current.tint])
         textField.inputAccessoryView = firstInputView()
-//        datePicker.datePickerMode = .date
         taskTableView.register(TaskTableCell.self, forCellReuseIdentifier: cellId)
         taskTableView.register(TaskHeader.self, forHeaderFooterViewReuseIdentifier: TaskView.headerId)
         
@@ -84,7 +82,6 @@ class TaskView: UIView {
         
         deleteButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
         deleteButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        
         deleteButton.centerYAnchor.constraint(equalTo: taskName.centerYAnchor).isActive = true
         deleteButton.trailingAnchor.constraint(equalTo: textField.trailingAnchor).isActive = true
     }
@@ -123,7 +120,6 @@ class TaskView: UIView {
     @objc func setTodo() {
         print("Trying to set the todo")
         self.selectorClosure?()
-
     }
     
     required init?(coder aDecoder: NSCoder) {

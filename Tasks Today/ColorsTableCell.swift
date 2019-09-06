@@ -10,19 +10,19 @@ import Foundation
 import UIKit
 
 class ColorsTableCell: UITableViewCell {
+    
     func setup(color: UIColor) {
         contentView.backgroundColor = color
     }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = Theme.current.background
-        
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        
-        //contentView.backgroundColor = .white
+
         contentView.layer.cornerRadius = 10
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0))
         contentView.layer.borderWidth = 0.75

@@ -48,10 +48,8 @@ class TaskTableCell: UITableViewCell {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
             
             self.backgroundColor = Theme.current.background
-            
             contentView.backgroundColor = Theme.current.accent
             contentView.layer.cornerRadius = 10
-            
             notesLabelConstraints()
             notesViewConstraints()
             saveButtonConstraints()

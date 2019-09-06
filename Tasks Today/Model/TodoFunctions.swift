@@ -9,18 +9,11 @@
 import Foundation
 
 class TodoFunctions {
+    
     static func createTodos(at taskIndex: Int, todoModel: TodoModel){
         Data.taskModels[taskIndex].todoModels.append(todoModel)
     }
 
-    static func readTodos(){
-    
-    }
-    
-    static func updateTodos(){
-        
-    }
-    
     static func deleteTodos(at taskIndex: Int, in todoIndex: Int){
          print(todoIndex)
          Data.taskModels[taskIndex].todoModels.remove(at: todoIndex)
@@ -39,7 +32,6 @@ class TodoFunctions {
                     deleteTodos(at: tasks, in: todos)
                     break
                 }
-                //print("\(Data.taskModels[tasks].todoModels[todos]) AND \(todoModel)")
             }
         }
     }

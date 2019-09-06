@@ -41,10 +41,6 @@ class TaskFunctions {
         }
     }
     
-    static func updateTasks(taskModel: TaskModel){
-        
-    }
-    
     static func deleteTasks(index: Int){
         Data.taskModels.remove(at: index)
     }

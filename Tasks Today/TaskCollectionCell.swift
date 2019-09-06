@@ -56,7 +56,6 @@ class TaskCollectionCell: UICollectionViewCell {
         super.init(frame: frame)
         
         backgroundColor =  Theme.current.accent
-        
         taskNameConstraints()
         circleImageConstraints()
         numberLabelConstraints()
