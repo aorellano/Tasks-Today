@@ -38,6 +38,7 @@ class TaskTableCell: UITableViewCell {
             button.titleLabel?.font = Theme.mainFontName?.withSize(14)
             button.layer.cornerRadius = 5.0
             button.layer.masksToBounds = true
+            button.addTarget(self, action: #selector(TaskController.saveNote), for: .touchUpInside)
             button.translatesAutoresizingMaskIntoConstraints = false
             button.isHidden = true
             return button

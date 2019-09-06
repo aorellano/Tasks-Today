@@ -10,12 +10,15 @@ import Foundation
 import UIKit
 
 class ThemesView: UIView {
+    var themesLabel = CustomLabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = Theme.current.background
         
+        themesLabelConstraints()
         colorTableViewConstraints()
+        
     }
     
     var colorTableView: UITableView = {
@@ -29,9 +32,17 @@ class ThemesView: UIView {
         return tableView
     }()
     
+    func themesLabelConstraints(){
+        addSubview(themesLabel)
+        
+        themesLabel.text = "T H E M E S"
+        themesLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 40).isActive = true
+        themesLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+    }
+    
     func colorTableViewConstraints(){
         self.addSubview(colorTableView)
-        colorTableView.topAnchor.constraint(equalTo: self.topAnchor, constant: 25).isActive = true
+        colorTableView.topAnchor.constraint(equalTo: themesLabel.bottomAnchor, constant: 20).isActive = true
         colorTableView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
         colorTableView.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: -10).isActive = true
         colorTableView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true

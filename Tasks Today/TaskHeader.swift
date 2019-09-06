@@ -21,6 +21,7 @@ class TaskHeader: UITableViewHeaderFooterView {
     var expandButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .clear
+        button.addTarget(self, action: #selector(TaskController.expandSection), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()

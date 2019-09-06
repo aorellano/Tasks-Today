@@ -14,18 +14,25 @@ class ThemesController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        let edgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(screenEdgeSwiped))
-        edgePan.edges = .left
-        view.addGestureRecognizer(edgePan)
-        
+        protocolSetups()
+        enableSwipeAction()
+    }
+    
+    override func loadView() {
+        view = themesView
+    }
+    
+    func protocolSetups(){
         themesView.colorTableView.dataSource = self
         themesView.colorTableView.delegate = self
         themesView.colorTableView.register(ColorsTableCell.self, forCellReuseIdentifier: "First")
     }
     
-    override func loadView() {
-        view = themesView
+    func enableSwipeAction() {
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        let edgePan = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(screenEdgeSwiped))
+        edgePan.edges = .left
+        view.addGestureRecognizer(edgePan)
     }
     
     @objc func screenEdgeSwiped(_ recognizer: UIScreenEdgePanGestureRecognizer) {
@@ -35,8 +42,6 @@ class ThemesController: UIViewController {
             present(home, animated: true)
         }
     }
-    
-    
 }
 
 extension ThemesController: UITableViewDataSource, UITableViewDelegate {

@@ -34,12 +34,15 @@ class TaskView: UIView {
         button.titleLabel?.font = (Theme.mainFontName?.withSize(12))
         button.layer.cornerRadius = 5
         button.backgroundColor = .red
+        button.addTarget(self, action: #selector(TaskController.deleteTask), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        self.backgroundColor = Theme.current.background
         
         textField.attributedPlaceholder = NSAttributedString(string: "Enter todo",attributes: [NSAttributedString.Key.foregroundColor: Theme.current.tint])
         textField.inputAccessoryView = firstInputView()

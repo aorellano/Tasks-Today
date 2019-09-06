@@ -20,7 +20,6 @@ class HomeController: UIViewController, UITextFieldDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         protocolSetups()
         loadData()
     }
@@ -53,21 +52,25 @@ class HomeController: UIViewController, UITextFieldDelegate{
     }
     
     @objc func settingsButtonsPressed() {
-        let settingsVC = SettingsController()
-        present(settingsVC, animated: true)
+        let themesVC = ThemesController()
+        present(themesVC, animated: true)
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
         textField.placeholder = "Enter Task"
         if textField.text != "" {
-            TaskFunctions.createTask(taskModel: TaskModel(title: textField.text!, itemNumbers: 0))
-            homeView.taskCollectionView.reloadData()
-            let indexPath = IndexPath(row: (Data.taskModels.count - 1), section: 0)
-            homeView.taskCollectionView.scrollToItem(at: indexPath, at: .right, animated: true)
+            addTask(taskName: textField.text!)
             textField.text = ""
         }
         return false
+    }
+    
+    func addTask(taskName: String){
+        TaskFunctions.createTask(taskModel: TaskModel(title: taskName, itemNumbers: 0))
+        homeView.taskCollectionView.reloadData()
+        let indexPath = IndexPath(row: (Data.taskModels.count - 1), section: 0)
+        homeView.taskCollectionView.scrollToItem(at: indexPath, at: .right, animated: true)
     }
     
     @objc func itemCompleted(_ button: UIButton){
@@ -76,23 +79,25 @@ class HomeController: UIViewController, UITextFieldDelegate{
         
         let todo = todayTodos[section]
         print("\(todayTodos[section]) is about to get deleted")
-        
+ 
         if let cell = homeView.todayTableView.headerView(forSection: section) as? TaskHeader {
             UIView.animate(withDuration: 0.6, delay: 0.0, animations: {
                 
                 cell.titleLabel.attributedText = self.strikeThroughText((todo.title))
-                
-                self.homeView.todayTableView.beginUpdates()
-                TodoFunctions.deleteTodayTodos(todoModel: todo)
-                self.todayTodos.remove(at: section)
-                self.homeView.todayTableView.deleteSections([section], with: .right)
-                self.homeView.taskCollectionView.reloadData()
-                self.homeView.todayTableView.endUpdates()
-                
+                self.updateTaskData(todo, section)
             }, completion: { (success) in
                 self.homeView.todayTableView.reloadData()
             })
         }
+    }
+    
+    func updateTaskData(_ todo: TodoModel, _ section: Int) {
+        self.homeView.todayTableView.beginUpdates()
+        TodoFunctions.deleteTodayTodos(todoModel: todo)
+        self.todayTodos.remove(at: section)
+        self.homeView.todayTableView.deleteSections([section], with: .right)
+        self.homeView.taskCollectionView.reloadData()
+        self.homeView.todayTableView.endUpdates()
         if todayTodos.count == 0 {
             homeView.todayTableView.isHidden = true
         }
@@ -103,7 +108,6 @@ class HomeController: UIViewController, UITextFieldDelegate{
         attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 1, range: NSMakeRange(0, attributeString.length))
         return attributeString
     }
-
 }
 extension HomeController: UICollectionViewDataSource, UICollectionViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -147,11 +151,9 @@ extension HomeController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let taskHeader = homeView.todayTableView.dequeueReusableHeaderFooterView(withIdentifier: homeView.headerViewId) as! TaskHeader
-
         let todoModel = todayTodos[section]
         taskHeader.setup(model: todoModel)
         taskHeader.checkBox.tag = section
-
         return taskHeader
     }
 

@@ -25,7 +25,6 @@ class HomeView: UIView {
         icon.addTarget(self, action: #selector(HomeController.settingsButtonsPressed), for: .touchUpInside)
         
         icon.layer.shadowOpacity = 0.75
-        //icon.layer.shadowRadius = 2
         icon.layer.shadowOffset = CGSize(width: 0, height: 4)
         icon.layer.shadowColor = UIColor.darkGray.cgColor
         
@@ -39,7 +38,6 @@ class HomeView: UIView {
         tableView.layer.cornerRadius = 10.0
         tableView.clipsToBounds = true
         tableView.backgroundColor = Theme.current.background
-        //        tableView.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1)
         tableView.isHidden = true
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
@@ -62,7 +60,6 @@ class HomeView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         self.backgroundColor = Theme.current.background
         
         collectionViewLayout()
@@ -70,7 +67,6 @@ class HomeView: UIView {
         taskCollectionView.register(TaskCollectionCell.self, forCellWithReuseIdentifier: collectionCellId)
         todayTableView.register(UITableViewCell.self, forCellReuseIdentifier: tableViewCellId)
         todayTableView.register(TaskHeader.self, forHeaderFooterViewReuseIdentifier: headerViewId)
-        
         
         textFieldConstraints()
         tasksLabelConstraints()
@@ -103,7 +99,6 @@ class HomeView: UIView {
         tasksLabel.text = "T A S K S"
         tasksLabel.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 20).isActive = true
         tasksLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15).isActive = true
-        
     }
     
     func collectionViewConstraints(){
@@ -120,11 +115,7 @@ class HomeView: UIView {
         todayLabel.text = "T O D A Y"
         todayLabel.topAnchor.constraint(equalTo: taskCollectionView.bottomAnchor, constant: 12).isActive = true
         todayLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15).isActive = true
-        
     }
-    
-    
-    
     
     func tableViewConstraints(){
         self.addSubview(todayTableView)
@@ -133,13 +124,11 @@ class HomeView: UIView {
         todayTableView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
         todayTableView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
+    
     func finishedLabelConstraints(){
         self.addSubview(finishedLabel)
-        
         finishedLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         finishedLabel.topAnchor.constraint(equalTo: todayLabel.bottomAnchor, constant: 100).isActive = true
-        
-        
     }
     
     func settingsIconConstraints(){
