@@ -11,6 +11,8 @@ import UIKit
 
 class ThemesController: UIViewController {
     let themesView = ThemesView()
+
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -61,25 +63,27 @@ extension ThemesController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            Theme.current = whiteTheme
+            Theme().changeTheme(to: .white)
         } else if indexPath.row == 1 {
-            Theme.current = blackTheme
+            Theme().changeTheme(to: .black)
         } else if indexPath.row == 2 {
-            Theme.current = blueTheme
+            Theme().changeTheme(to: .blue)
         } else if indexPath.row == 3 {
-            Theme.current = redTheme
+            Theme().changeTheme(to: .red)
         } else if indexPath.row == 4  {
-            Theme.current = greenTheme
+            Theme().changeTheme(to: .green)
         } else if indexPath.row == 5 {
-            Theme.current = purpleTheme
+            Theme().changeTheme(to: .purple)
         } else if indexPath.row == 6 {
-            Theme.current = pinkTheme
+            Theme().changeTheme(to: .pink)
         } else {
-            Theme.current = goldTheme
+            Theme().changeTheme(to: .gold)
         }
-        
+
         let home = HomeController()
         home.modalTransitionStyle = .flipHorizontal
         present(home, animated: true)
     }
+    
+    
 }

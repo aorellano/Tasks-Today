@@ -9,13 +9,22 @@
 import Foundation
 import UIKit
 
-class Colors: ThemeProtocol {
+class Colors: Codable {
     var mainFontName: String
     var fontColor: UIColor
     var background: UIColor
     var accent: UIColor
     var tint: UIColor
     var circle: String
+    
+    enum CodingKeys: String, CodingKeys {
+        case mainFontName
+        case fontColor
+        case background
+        case accent
+        case tint
+        case circle
+    }
     
     init(mainFontName: String, fontColor: UIColor, background: UIColor, accent: UIColor, tint: UIColor, circle: String){
         self.mainFontName = mainFontName

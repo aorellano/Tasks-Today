@@ -10,7 +10,7 @@
 		D0B2733722BF274000C9926E /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B2733622BF274000C9926E /* TaskModel.swift */; };
 		D0B2733A22BF286E00C9926E /* TaskFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B2733922BF286E00C9926E /* TaskFunctions.swift */; };
 		D0B2733C22BF295600C9926E /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B2733B22BF295600C9926E /* Data.swift */; };
-		D0B2733F22BF400700C9926E /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B2733E22BF400700C9926E /* Theme.swift */; };
+		D0B2733F22BF400700C9926E /* Themes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B2733E22BF400700C9926E /* Themes.swift */; };
 		D0B2734322C1780D00C9926E /* TodoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B2734222C1780D00C9926E /* TodoModel.swift */; };
 		D0B2734722C179FB00C9926E /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B2734622C179FB00C9926E /* MockData.swift */; };
 		D0B2734C22C2957800C9926E /* TodoFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B2734B22C2957800C9926E /* TodoFunctions.swift */; };
@@ -39,7 +39,7 @@
 		D0B2733622BF274000C9926E /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		D0B2733922BF286E00C9926E /* TaskFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskFunctions.swift; sourceTree = "<group>"; };
 		D0B2733B22BF295600C9926E /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
-		D0B2733E22BF400700C9926E /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		D0B2733E22BF400700C9926E /* Themes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Themes.swift; sourceTree = "<group>"; };
 		D0B2734222C1780D00C9926E /* TodoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoModel.swift; sourceTree = "<group>"; };
 		D0B2734622C179FB00C9926E /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		D0B2734B22C2957800C9926E /* TodoFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoFunctions.swift; sourceTree = "<group>"; };
@@ -184,7 +184,7 @@
 		D0EC31322304DEE9001716AB /* Theme */ = {
 			isa = PBXGroup;
 			children = (
-				D0B2733E22BF400700C9926E /* Theme.swift */,
+				D0B2733E22BF400700C9926E /* Themes.swift */,
 				D0EC31332304DF20001716AB /* ThemeProtocol.swift */,
 				D0EC31352304DF5B001716AB /* Colors.swift */,
 			);
@@ -276,7 +276,7 @@
 				D0DFD68822B18983009A6628 /* CustomTextField.swift in Sources */,
 				D0B2734722C179FB00C9926E /* MockData.swift in Sources */,
 				D0B2734322C1780D00C9926E /* TodoModel.swift in Sources */,
-				D0B2733F22BF400700C9926E /* Theme.swift in Sources */,
+				D0B2733F22BF400700C9926E /* Themes.swift in Sources */,
 				D0DFD65D22AC5E8F009A6628 /* AppDelegate.swift in Sources */,
 				D0B2733A22BF286E00C9926E /* TaskFunctions.swift in Sources */,
 				D0B2734C22C2957800C9926E /* TodoFunctions.swift in Sources */,
